@@ -2,13 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bef09221-aab0-499d-9b58-7964ef49f314" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pitcher/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pitcher/add_details.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pitcher/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/pitcher/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pitcher_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pitcher_app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pitcher_app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher_app/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pitcher_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher_app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitcher/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitcher/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitcher/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitcher/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/investor/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/investor/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pitcher/add_details.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pitcher/new pitch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pitcher/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pitcher/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/signup.html" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,8 +29,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -57,20 +66,19 @@
       <recent name="C:\Users\monil\Desktop\CSE 546 - Cloud Computing\Projects\Project 2\New Folder\pitcher\templates\users" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
-    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
-      <module name="pitcher_app" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="pitcher_app" type="Python.DjangoServer" factoryName="Django server">
       <module name="pitcher_app" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,9 +87,9 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="pitcher_app.settings" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\monil\Anaconda3\python.exe" />
       <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
@@ -114,6 +122,8 @@
       <workItem from="1588051681670" duration="110000" />
       <workItem from="1588051819116" duration="198000" />
       <workItem from="1588131198198" duration="552000" />
+      <workItem from="1588132653463" duration="573000" />
+      <workItem from="1588133269710" duration="7043000" />
     </task>
     <servers />
   </component>

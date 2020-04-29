@@ -1,18 +1,13 @@
-{% extends "users/base.html" %}
+{% extends "pitcher/base.html" %}
 {% block content %}
 
-<div style="text-align: center; align-self: center;">
-    <form action="/pitcher/new pitch/" method="POST" enctype="multipart/form-data">
+<div style="text-align: center; align-self: center;width: 50%; margin: 2% 10% 2% 10%;">
+    <form action="/pitcher/new pitch/" method="POST" enctype="multipart/form-data" style="display: inline">
         {% csrf_token %}
-        <div>
-            <pre>Pitch Title:      <input type="text" name="title" placeholder="Title"> <br/></pre>
-            <pre>Description       <input type="text" name="description" placeholder="description"> <br/></pre>
-            <pre>Upload Video      <input type="file" name="video" placeholder="Upload your video"> <br/></pre>
-            {% if message %}
-                <p style="font-size: 8px; color: red;">{{ message }}</p>
-            {% endif %}
-            <pre><input type="submit" value="Submit"></pre>
-        </div>
+        <label>Pitch Title: <input type="text" name="title" placeholder="Title"> </label> <br/>
+        <label>Description: <textarea name="description" placeholder="description"></textarea></label> <br/>
+        <label>Upload Video: <input type="file" name="video" ></label> <br/>
+        <input type="submit" value="Submit">
     </form>
 </div>
 

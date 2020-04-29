@@ -1,12 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pitcher-Dashboard</title>
-</head>
-<body>
-        <form action="/pitcher/add_details">
-            Click to Submit Pitch Details: <input type="submit" value="submit">
-        </form>
-</body>
-</html>
+{% extends 'pitcher/base.html' %}
+{% block content %}
+    <div style="2px solid black; height: 100%; width:100%;">
+        <div id="pitcher-search" style="border:1px solid lightslategrey;">
+            <form action="">
+                <input type="text" style="width: 80%; margin-right: 1%; margin-left: 1%;" placeholder="search">
+                <input type="submit" value="Search" style="width: 15%; margin-right: 0.5%;">
+            </form>
+        </div>
+        <div id="pitches" style="height: 100%;">
+            <div style="border: 1px solid lightblue; border-radius: 10%; background-color: #aeaefe">
+                <table style="text-align: center; color: black; ">
+                    <tr><td>Title</td>
+                        <td>title</td></tr>
+                    <tr><td>Body</td>
+                        <td><p>body contents</p></td></tr>
+                    <tr><td>Tags</td>
+                        <td><label>tag1</label></td></tr>
+                    <tr><td>Body</td>
+                        <td><p>body contents</p></td></tr>
+                </table>
+            </div>
+            <div style="border: 1px solid lightblue; border-radius: 10%; background-color: #aeaefe">
+                <table style="text-align: center; color: black; ">
+                    <tr><td>Title</td>
+                        <td>title</td></tr>
+                    <tr><td>Body</td>
+                        <td><p>body contents</p></td></tr>
+                    <tr><td>Tags</td>
+                        <td><label>tag1</label></td></tr>
+                    <tr><td>Body</td>
+                        <td><p>body contents</p></td></tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

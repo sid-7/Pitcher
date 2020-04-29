@@ -1,10 +1,41 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+  <meta charset="UTF-8">
+  <meta content="Mashup templates have been developped by Orson.io team" name="author">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'users/assets/apple-icon-180x180.png' %}">
+  <link href="{% static 'users/assets/favicon.ico' %}" rel="icon">
+  <link href="" rel="stylesheet">
+  <title>Title page</title>
+  <link href="{% static 'users/main.550dcf66.css' %}" rel="stylesheet">
 </head>
+
 <body>
-$END$
-</body>
+    <header>
+      <nav class="navbar navbar-default active">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/pitcher/dashboard" title="">Pitcher</a>
+          </div>
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/pitcher/dashboard/" title="">Home</a></li>
+                <li><a href="/pitcher/new pitch/" title="">New Pitch</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <body>
+        <div style="width:23%; height: 100%; border:2px solid black;float: right; margin-right: 1%; margin-left: 1%;"></div>
+        <div style="width:73%; height: 100%; border:2px solid black;float: left; margin-right: 1%; margin-left: 1%;" >{% block content %}{% endblock %}</div>
+    </body>
 </html>

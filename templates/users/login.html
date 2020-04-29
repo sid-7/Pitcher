@@ -1,9 +1,8 @@
 {% extends 'users/base.html' %}
 {% block content %}
-<div style="display: inline-block;width: 50%;height:100%;border: 2px solid black;text-align: center">
-    <form action="/user/login/" method="POST">
+<div style="display: inline-block;width: 50%;height:100%;border: 2px solid black;text-align: center; margin-left: 25%;">
+    <form action="/user/login/" method="POST" style="align-self: center;">
         {% csrf_token %}
-        <div>
             <pre>Email:    <input type="text" name="email"> <br/></pre>
             <pre>Password: <input type="password" name="password"></pre>
             <pre>Role:  <input type="radio" name="role" value="pitcher" style="margin-left: 60px;"><label for="pitcher"> Pitcher</label><br/></pre>
@@ -13,7 +12,7 @@
                 <p style="font-size: 8px; color: red;">{{ message }}</p>
             {% endif %}
             <pre><input type="submit" value="Login"></pre>
-        </div>
+
     </form>
 </div>
 {% endblock %}

@@ -2,20 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bef09221-aab0-499d-9b58-7964ef49f314" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/pitcher/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pitcher_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pitcher_app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/contributor/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/contributor/current_projects.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/contributor/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pitcher/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pitcher/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contributor/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/contributor/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contributor/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/contributor/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pitcher/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pitcher/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/investor/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/investor/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pitcher/add_details.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pitcher/new pitch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pitcher/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pitcher/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pitcher/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pitcher/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/static/users/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/users/static/users/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,14 +55,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\ASU Courses\Sem_2\CSE-546 Cloud Computing\Project2\Project_2\pitcher_app\templates\pitcher" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\monil\Desktop\CSE 546 - Cloud Computing\Projects\Project 2\New Folder\pitcher\contributor" />
       <recent name="C:\Users\monil\Desktop\CSE 546 - Cloud Computing\Projects\Project 2\New Folder\pitcher\users" />
       <recent name="C:\Users\monil\Desktop\CSE 546 - Cloud Computing\Projects\Project 2\New Folder\pitcher\static\users" />
       <recent name="C:\Users\monil\Desktop\CSE 546 - Cloud Computing\Projects\Project 2\New Folder\pitcher\templates\users" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ASU Courses\Sem_2\CSE-546 Cloud Computing\Project2\Project_2\pitcher_app\templates\pitcher" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -124,6 +123,7 @@
       <workItem from="1588131198198" duration="552000" />
       <workItem from="1588132653463" duration="573000" />
       <workItem from="1588133269710" duration="7043000" />
+      <workItem from="1588210316737" duration="4401000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path,include
-from contributer import views
+from . import views
 
 urlpatterns = [
-    path('dashboard', views.dashboard, 'contributor-dashboard'),
+    path('dashboard/', views.dashboard, name='contributor-dashboard'),
+    path('new pitch/', views.current_projects, name='contributor-current_projects'),
 ]

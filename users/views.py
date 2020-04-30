@@ -14,21 +14,27 @@ def login(request):
         email = request.POST.get("email")
         password = request.POST.get("password")
         role = request.POST.get("role")
-        print(email, password, role)
         user = UserRegistration.objects.filter(email=email)
         # user = auth.authenticate(username=username,password=password)
         user_values = user.values()
-        print(user_values[0])
 
         if user.count() != 0 and user_values[0]['role'] == role:
             if (password == user_values[0]['password']):
                 print(role)
                 if(role=='pitcher'):
+                    request.session['email'] = email
+                    request.session['role'] = role
                     return redirect("/pitcher/dashboard")
                 elif(role=='investor'):
+                    request.session['email'] = email
+                    request.session['role'] = role
                     return redirect("/investor/dashboard")
                 elif(role=='contributor'):
+                    request.session['email'] = email
+                    request.session['role'] = role
                     return redirect("/contributor/dashboard")
+                else:
+                    return redirect("/user/home", {'message':'Role error'})
             else:
                 return render(request, 'users/login.html', {'message':'Invalid login credentials.'})
         else:

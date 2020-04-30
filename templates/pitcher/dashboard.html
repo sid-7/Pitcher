@@ -8,30 +8,21 @@
             </form>
         </div>
         <div id="pitches" style="height: 100%;">
-            <div style="border: 1px solid lightblue; border-radius: 10%; background-color: #aeaefe">
-                <table style="text-align: center; color: black; ">
-                    <tr><td>Title</td>
-                        <td>title</td></tr>
-                    <tr><td>Body</td>
-                        <td><p>body contents</p></td></tr>
-                    <tr><td>Tags</td>
-                        <td><label>tag1</label></td></tr>
-                    <tr><td>Body</td>
-                        <td><p>body contents</p></td></tr>
-                </table>
-            </div>
-            <div style="border: 1px solid lightblue; border-radius: 10%; background-color: #aeaefe">
-                <table style="text-align: center; color: black; ">
-                    <tr><td>Title</td>
-                        <td>title</td></tr>
-                    <tr><td>Body</td>
-                        <td><p>body contents</p></td></tr>
-                    <tr><td>Tags</td>
-                        <td><label>tag1</label></td></tr>
-                    <tr><td>Body</td>
-                        <td><p>body contents</p></td></tr>
-                </table>
-            </div>
+            {% for pitch in pitches %}
+                <div class="pitch">
+                    <table class="pitch-table">
+                        <tr><td>Title</td>
+                            <td>{{ pitch.title }}</td></tr>
+                        <tr><td>Body</td>
+                            <td><p>{{ pitch.body }}</p></td></tr>
+                        <tr><td>Tags</td>
+                            <td>{% for tag in pitch.tags %}
+                                <label>{{ tag }}</label>
+                                {% endfor %}
+                            </td></tr>
+                    </table>
+                </div>
+            {% endfor %}
         </div>
 
     </div>

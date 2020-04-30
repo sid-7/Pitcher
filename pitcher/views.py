@@ -9,9 +9,14 @@ def dashboard(request):
     # {'pitches': pitches}
     if(True):
         userid = 'n'
-        all_pitches = AddDetails.objects.filter(userid=userid)
-        print(all_pitches)
-        return render(request, 'pitcher/dashboard.html', {'pitches':all_pitches})
+        all_pitches = AddDetails.objects.filter(userid=userid).all()
+        # u = AddDetails(userid=userid)
+        # all_pitches = u.objects
+        p = []
+        for pitches in all_pitches:
+            p.append({'title':pitches.title, 'body':pitches.description, 'tags':['tag1', 'tag2']})
+        print(p)
+        return render(request, 'pitcher/dashboard.html', {'pitches':p})
     else:
         return render(request, 'pitcher/dashboard.html')
 
@@ -33,3 +38,11 @@ def new_pitch(request):
         return render(request, 'pitcher/dashboard.html')
     else:
         return render(request, 'pitcher/new pitch.html')
+
+def logout(request):
+    try:
+        del request.session['role']
+        del request.session['email']
+    except:
+        print("Some error while logging out!")
+    return render(request, 'users/home.html')

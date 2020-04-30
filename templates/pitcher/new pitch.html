@@ -2,7 +2,7 @@
 {% block content %}
 
 <div style="text-align: center; align-self: center;width: 50%; margin: 2% 10% 2% 10%;">
-    <form action="/pitcher/new pitch/" method="POST" enctype="multipart/form-data" style="display: inline">
+    <form action="/pitcher/new_pitch/" method="POST" enctype="multipart/form-data" style="display: inline">
         {% csrf_token %}
         <label>Pitch Title: <input type="text" name="title" placeholder="Title"> </label> <br/>
         <label>Description: <textarea name="description" placeholder="description"></textarea></label> <br/>

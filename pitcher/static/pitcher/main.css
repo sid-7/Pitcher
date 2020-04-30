@@ -1,0 +1,22 @@
+.pitches{
+	height: 100%;
+	margin: 2px 2px 2px 2px;
+	padding: 2px 2px 2px 2px;
+}
+.pitch {
+	border: 1px solid lightblue;
+	border-radius: 10%;
+	background-color: #aeaefe;
+	margin: 2px 2px 2px 2px;
+}
+
+.pitch-table {
+	text-align: center;
+	color: black;
+	border: 2px solid cornflowerblue;
+	width: 100%;
+}
+
+.pitch-table td{
+	border: 2px solid red;
+}

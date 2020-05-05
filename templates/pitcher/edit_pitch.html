@@ -1,0 +1,16 @@
+{% extends "pitcher/base.html" %}
+{% block content %}
+
+ <div style="text-align: center; align-self: center;width: 50%; margin: 2% 10% 2% 10%;">
+    <form action="/pitcher/edit_pitch/" method="POST" enctype="multipart/form-data" style="display: inline">
+        {% csrf_token %}
+        <input type="hidden" name="key" value="{{ key }}">
+        <label>Pitch Title: <input type="text" name="title" value="{{ title }}"> </label> <br/>
+        <label>Description: <textarea name="description" >{{ body }}</textarea></label> <br/>
+        <label>Status: </label> <input type="radio" value="active" name="status"{% if active %}checked{% endif %}> <label>Active</label><br/>
+            <input type="radio" value="completed" style="margin-left: 93px;" name="status"{% if not active %}checked{% endif %}> <label>Completed</label><br/><br/>
+        <label>Upload file: <input type="file" name="file" ></label> <br/>
+        <input type="submit" value="Update">
+    </form>
+</div>
+{% endblock %}

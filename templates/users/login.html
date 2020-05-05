@@ -1,18 +1,18 @@
 {% extends 'users/base.html' %}
 {% block content %}
-<div style="display: inline-block;width: 50%;height:100%;border: 2px solid black;text-align: center; margin-left: 25%;">
-    <form action="/user/login/" method="POST" style="align-self: center;">
+<div style="display: inline-block;width: 25%;height:100%;border: 2px solid black;text-align: left; margin-left: 25%;">
+    <form action="/user/login/" method="POST" style="align-self: left;">
         {% csrf_token %}
-            <pre>Email:    <input type="text" name="email"> <br/></pre>
-            <pre>Password: <input type="password" name="password"></pre>
-            <pre>Role:  <input type="radio" name="role" value="pitcher" style="margin-left: 60px;"><label for="pitcher"> Pitcher</label><br/></pre>
-            <pre>        <input type="radio" name="role" value="investor" style="margin-left: 60px;"><label for="investor"> Investor</label><br/></pre>
-            <pre>            <input type="radio" name="role" value="contributor" style="margin-left: 60px;"><label for="contributor"> Contributor</label> <br/></pre>
+            <pre><div>Email:    <input type="text" name="email"> <br/></div>
+            <div>Password: <input type="password" name="password"></div>
+            <div>Role:  <input type="radio" name="role" value="pitcher" ><label for="pitcher"> Pitcher</label>
+                <input type="radio" name="role" value="investor" style="margin-left: -83.5px;"><label for="investor"> Investor</label>
+                <input type="radio" name="role" value="contributor" style="margin-left: -83.5px;"><label for="contributor"> Contributor</label></div>
+            </pre>
             {% if message %}
                 <p style="font-size: 8px; color: red;">{{ message }}</p>
             {% endif %}
-            <pre><input type="submit" value="Login"></pre>
-
+            <input type="submit" value="Login" style="margin-left: 40%;"><br/>
     </form>
 </div>
 {% endblock %}

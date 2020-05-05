@@ -9,21 +9,55 @@
         </div>
         <div id="pitches" class="pitches">
             {% for pitch in pitches %}
-                <div class="pitch">
-                    <table class="pitch-table">
-                        <tr><td>Title</td>
-                            <td>{{ pitch.title }}</td></tr>
-                        <tr><td>Body</td>
-                            <td><p>{{ pitch.body }}</p></td></tr>
-                        <tr><td>Tags</td>
-                            <td>{% for tag in pitch.tags %}
-                                <label>{{ tag }}</label>
-                                {% endfor %}
-                            </td></tr>
-                    </table>
+                <div class="pitch" onclick="pitch_click(this);">
+                    <input type="hidden" value="{{ pitch.key }}" name="key">
+                    <div class="pitch-title">{{ pitch.title }}</div>
+                    {% if pitch.status == "active" %}
+                        <div class="pitch-status" style="color:green;">{{ pitch.status }}</div>
+                    {% else %}
+                        <div class="pitch-status" style="color:red;">{{ pitch.status }}</div>
+                    {% endif %}
+                    <div class="pitch-date">{{ pitch.date }}</div>
+                    <div class="pitch-gist">{{ pitch.gist }}</div>
+                    <div class="pitch-tags">{{ pitch.tags }}</div>
+
+                    <div class="pitch-body" hidden>{{ pitch.body }}</div>
+                    <div class="pitch-contributors" hidden>{{ pitch.contributors }}</div>
+                    <div class="pitch-investors" hidden>{{ pitch.investors }}</div>
+
+
                 </div>
             {% endfor %}
         </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="/pitcher/edit_pitch/" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="key" class="key">
+                <input type="submit" style="float: right; margin-top: 20px;margin-left: 25px;cursor: pointer;" value="Edit">
+            </form>
+            <form action="/pitcher/delete_pitch/" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="key" class="key">
+                <input type="submit" style="float: right; margin-top: 20px;margin-left: 25px;cursor: pointer;" value="delete">
+            </form>
+                <div id="title"></div>
+                <div id="status"></div>
+                <div id="date" hidden></div>
+                <div id="gist" hidden></div>
+                <div id="whole"></div>
+                <div id="summary"></div>
+                <div id="files"></div>
+                <div id="contributors"></div>
+                <div id="investors"></div>
+                <div id="tags"></div>
+            </div>
+        </div>
 
     </div>
+
 {% endblock %}

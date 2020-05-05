@@ -2,8 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bef09221-aab0-499d-9b58-7964ef49f314" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pitcher/static/pitcher/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/pitcher/edit_pitch.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/static/users/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/investor/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/investor/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/investor/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/investor/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitcher/static/pitcher/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/static/pitcher/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitcher/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitcher/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitcher_app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher_app/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pitcher/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pitcher/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pitcher/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pitcher/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pitcher/new pitch.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pitcher/new pitch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/static/users/main.550dcf66.css" beforeDir="false" afterPath="$PROJECT_DIR$/users/static/users/main.550dcf66.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,6 +32,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="JavaScript File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -40,11 +55,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pitcher/static/pitcher" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\monil\Desktop\CSE 546 - Cloud Computing\Projects\Project 2\New folder\pitcher_app\pitcher\static\pitcher" />
       <recent name="C:\Users\monil\Desktop\CSE 546 - Cloud Computing\Projects\Project 2\New folder\pitcher_app\investor" />
       <recent name="C:\Users\monil\Desktop\CSE 546 - Cloud Computing\Projects\Project 2\New folder\pitcher_app\pitcher\static" />
       <recent name="D:\ASU Courses\Sem_2\CSE-546 Cloud Computing\Project2\Project_2\pitcher_app\templates\pitcher" />
@@ -117,6 +133,12 @@
       <workItem from="1588210316737" duration="4401000" />
       <workItem from="1588233470902" duration="5370000" />
       <workItem from="1588278422845" duration="1167000" />
+      <workItem from="1588373893345" duration="10273000" />
+      <workItem from="1588451390720" duration="452000" />
+      <workItem from="1588459721703" duration="599000" />
+      <workItem from="1588471340071" duration="12102000" />
+      <workItem from="1588530837712" duration="12000" />
+      <workItem from="1588629664422" duration="10842000" />
     </task>
     <servers />
   </component>

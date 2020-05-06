@@ -11,6 +11,10 @@
   <title>Title page</title>
   <link href="{% static 'pitcher/main.550dcf66.css' %}" rel="stylesheet">
   <link href="{% static 'pitcher/main.css' %}" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
   <script type="text/javascript" src="{% static 'pitcher/main.js' %}"></script>
 </head>
 
@@ -38,7 +42,7 @@
       </nav>
     </header>
     <body>
-        <div style="width:23%; height: 100%; border:2px solid black;float: right; margin-right: 1%; margin-left: 1%;"></div>
+        <div style="width:23%; height: 100%; border:2px solid black;float: right; margin-right: 1%; margin-left: 1%;">{% block chat %}{% endblock %}</div>
         <div style="width:73%; height: 100%; border:2px solid black;float: left; margin-right: 1%; margin-left: 1%;" >{% block content %}{% endblock %}</div>
     </body>
 </html>

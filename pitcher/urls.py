@@ -8,4 +8,5 @@ urlpatterns = [
     path('edit_pitch/',views.edit_pitch, name='pitcher_app-edit_pitch'),
     path('delete_pitch/',views.delete_pitch, name='pitcher_app-delete_pitch'),
     path('logout/', views.logout, name = 'pitcher-logout'),
+    path('chat_window/', views.chat_window, name='pitcher_app-chat_window'),
 ]

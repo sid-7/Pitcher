@@ -96,6 +96,18 @@ def signup(request):
             del request.sesssion['uid']
             return render(request, "users/home.html", {"message":"User registration successful!"})
 
+def reset_password(request):
+    if(len(request.POST)>1):
+        email = request.POST.get("email")
+        try:
+            firebase_auth.send_password_reset_email(email)
+        except:
+            print("error occured")
+        message = "email has been sent to you email address"
+        return redirect('/users/home', {message})
+    else:
+        return render(request, "users/reset_password.html")
+
 def about(request):
     pass
 

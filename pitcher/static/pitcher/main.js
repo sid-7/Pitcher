@@ -1,3 +1,18 @@
+var firebaseConfig = {
+     apiKey: 'AIzaSyBTlSwWe6lD6NLi8OrDPe49qWIllNgttMI',
+    authDomain: 'pitcher-275100.firebaseapp.com',
+    databaseURL: 'https://pitcher-275100.firebaseio.com',
+    projectId: 'pitcher-275100',
+    storageBucket: 'pitcher-275100.appspot.com',
+    messagingSenderId: '1008306122255',
+    appId: '1:1008306122255:web:58559788fa73c384fcbd7a',
+    measurementId: 'G-GPL016L81F',
+    };
+
+var fb= firebase.initializeApp(firebaseConfig);
+
+var storage = firebase.storage();
+
 function pitch_click(t) {
     var modal = document.getElementById("myModal");
     var btn = t;
@@ -25,6 +40,40 @@ function pitch_click(t) {
     }
 }
 
+function upload_media() {
+    var file = document.getElementById('files').files[0];
+    //console.log(file);
+    if (file != undefined) {
+        var storageRef = storage.ref("pitches/");
+        var thisRef = storageRef.child(file.name).put(file);
+        storageRef.child(file.name).getDownloadURL().then(function (url) {
+            console.log(url);
+            document.getElementById("url").value = url;
+        });
+    }
+    document.getElementById("pitch_form").submit();
+}
+
 function edit_pitch(){
     div = document.getElementById("edit-pitch");
 }
+
+/////////// chat  ////////
+var element = document.getElementById("maindiv");
+var toAdd = document.createDocumentFragment();
+//database polling for new child
+var starCountRef = firebase.database().ref("users/chatrooms/"+ chatId ).on('child_added', function(snapshot){console.log(snapshot.val());snapshot.forEach(function(childSnapshot){addMessage(childSnapshot.key, childSnapshot.val());})});
+
+function addMessage(key,message){
+      var newDiv = document.createElement('div');
+      newDiv.innerHTML = message;
+      newDiv.className = 'demo';
+      toAdd.appendChild(newDiv);
+      element.appendChild(toAdd);
+}
+function sendMessage(){
+      var msg = document.getElementById("messagearea");
+      console.log(msg.value);
+      var starCountRef = firebase.database().ref("users/chatrooms/"+ chatId ).push({"investor":msg.value});
+}
+

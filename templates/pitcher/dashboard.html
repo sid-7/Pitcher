@@ -24,13 +24,11 @@
                     <div class="pitch-body" hidden>{{ pitch.body }}</div>
                     <div class="pitch-contributors" hidden>{{ pitch.contributors }}</div>
                     <div class="pitch-investors" hidden>{{ pitch.investors }}</div>
-
-
+                    <div class="pitch-video" hidden>{{ pitch.file }}</div>
                 </div>
             {% endfor %}
         </div>
     </div>
-
     <div id="myModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
@@ -55,9 +53,20 @@
                 <div id="contributors"></div>
                 <div id="investors"></div>
                 <div id="tags"></div>
-            </div>
         </div>
-
     </div>
+{% endblock %}
 
+{% block chat %}
+    <div style="overflow: scroll;" id="chats">
+        {% for chat in chats %}
+            <form action="/pitcher/chat_window/" method="post">
+            {% csrf_token %}
+                <div>
+                    <input type="hidden" name="chatId" value="{{ chat.0 }}">
+                    <label style="float: left; margin-left:5%;">{{ chat.1 }}</label> <button type="submit" style="float:right; margin-right: 5%;" >Chat</button>
+                </div>
+            </form>
+        {% endfor %}
+    </div>
 {% endblock %}

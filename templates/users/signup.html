@@ -2,7 +2,7 @@
 {% block content %}
 
 <div style="display: inline-block;width: 50%;height:100%;border: 2px solid black;text-align: left; margin-left: 25%;">
-    <form action="/user/signup/" method="POST">
+    <form action="/users/signup/" method="POST">
         {% csrf_token %}
                 <div>First name:<input type="text" name="first_name" placeholder="First Name"></div>
                 <div>Last name:   <input type="text" name="last_name" placeholder="Last Name"></div>

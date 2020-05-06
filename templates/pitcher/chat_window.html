@@ -1,0 +1,12 @@
+{% extends 'pitcher/base.html' %}
+
+{% block content %}
+<script>
+    var chatId = "{{ chatId }}";
+</script>
+<div id="maindiv"></div>
+    <div >
+        <textarea id="messagearea" rows="3" ></textarea>
+        <button id="chatbutton" onclick="sendMessage()">Send</button>
+    </div>
+{% endblock %}

@@ -4,5 +4,7 @@ from . import views
 
 urlpatterns = [
     path('dashboard/', views.dashboard, name='contributor-dashboard'),
-    path('new pitch/', views.current_projects, name='contributor-current_projects'),
+    path('current_projects/', views.current_projects, name='contributor-current_projects'),
+    path('to_chatroom/', views.to_chatroom, name='contributor-to_chatroom'),
+    path('logout/', views.logout, name='contributor-logout'),
 ]

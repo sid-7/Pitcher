@@ -5,11 +5,16 @@
 <head>
   <meta charset="UTF-8">
   <meta content="Mashup templates have been developped by Orson.io team" name="author">
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'users/assets/apple-icon-180x180.png' %}">
-  <link href="{% static 'users/assets/favicon.ico' %}" rel="icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'contributor/assets/apple-icon-180x180.png' %}">
+  <link href="{% static 'contributor/assets/favicon.ico' %}" rel="icon">
   <link href="" rel="stylesheet">
-  <title>Title page</title>
-  <link href="{% static 'users/main.550dcf66.css' %}" rel="stylesheet">
+  <title>Contributor</title>
+  <link href="{% static 'contributor/main.550dcf66.css' %}" rel="stylesheet">
+  <link href="{% static 'contributor/main.css' %}" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
+  <script type="text/javascript" src="{% static 'contributor/main.js' %}"></script>
 </head>
 
 <body>
@@ -23,19 +28,19 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/contributor/dashboard" title="">Pitcher</a>
+            <a class="navbar-brand" href="/contributor/dashboard" >Contributor</a>
           </div>
           <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/contributor/dashboard/" title="">Home</a></li>
-                <li><a href="/contributor/current projects/" title="">New Pitch</a></li>
+                <li><a href="{% url 'contributor-dashboard' %}" >Home</a></li>
+                <li><a href="{% url 'contributor-to_chatroom' %}" >Enter Chatroom</a></li>
+                <li><a href="{% url 'contributor-logout' %}" >Logout</a></li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
-    <body>
         <div style="width:23%; height: 100%; border:2px solid black;float: right; margin-right: 1%; margin-left: 1%;"></div>
         <div style="width:73%; height: 100%; border:2px solid black;float: left; margin-right: 1%; margin-left: 1%;" >{% block content %}{% endblock %}</div>
-    </body>
+</body>
 </html>

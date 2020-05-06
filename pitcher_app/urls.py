@@ -20,10 +20,10 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/', include('users.urls')),
+    path('users/', include('users.urls')),
     path('investor/', include('investor.urls')),
     path('pitcher/',include('pitcher.urls')),
     #path('pitcher/*', include('pitcher.urls')),
-    #path('contributer/*', include('contributor.urls')),
+    path('contributor/', include('contributor.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) #for media

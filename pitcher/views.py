@@ -31,19 +31,20 @@ def dashboard(request):
             for chatroom in chatrooms.each():
                 if('investor_id' in chatroom.val()):
                     chat_details.append((chatroom.val()['key'], chatroom.val()['investor_id'], 'investors'))
-                else:
+                elif('contributor_id' in chatroom.val()):
                     chat_details.append((chatroom.val()['key'], chatroom.val()['contributor_id'], 'contributors'))
 
             for i,(a,b,c) in enumerate(chat_details):
+                print("users/{}/{}".format(c,b))
                 investor = firebase_database.child("users").child(c).child(b).get()
-                chat_details[i] = (chat_details[i][0], investor.val()['firstname'], chat_details[i][2])
+                chat_details[i] = (chat_details[i][0], investor.val().get('firstname'), chat_details[i][2])
 
-        print(chat_details)
+        print("chats for {}: {}".format(local_id, chat_details))
         #########################################
 
         data = firebase_database.child("users").child("pitches").child(local_id).child().get().val()
         if(data==None):
-            return render(request, 'pitcher/dashboard.html')
+            return render(request, 'pitcher/dashboard.html', {'chats':chat_details})
         P = []
         pitches = firebase_database.child("users").child("pitches").child(local_id).get()
         for pitch in pitches.each():
@@ -61,9 +62,10 @@ def dashboard(request):
             d['tags'] = [p.get('filename')]
             d['gist'] = p.get('gist')
             P.append(d)
+        print("Pitches for {}: {}".format(local_id, P))
         return render(request, 'pitcher/dashboard.html', {'pitches':list(P), 'chats':chat_details})
     else:
-        return render(request, 'pitcher/dashboard.html')
+        return redirect("users/home")
 
 def new_pitch(request):
     if(len(request.POST)!=0):

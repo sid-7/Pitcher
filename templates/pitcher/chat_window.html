@@ -1,12 +1,17 @@
 {% extends 'pitcher/base.html' %}
 
 {% block content %}
-<script>
-    var chatId = "{{ chatId }}";
-</script>
-<div id="maindiv"></div>
-    <div >
-        <textarea id="messagearea" rows="3" ></textarea>
-        <button id="chatbutton" onclick="sendMessage()">Send</button>
+    <div style="border: 2px solid black;height: 100%;width: 100%;">
+        <input type="hidden" id="chatId" value="{{ chatId }}">
+        <div id="maindiv" style="">
+        </div>
+        <div >
+            <textarea id="messagearea" rows="1" style="float:left"></textarea>
+            <button id="chatbutton" onclick="sendMessage()">Send</button>
+        </div>
     </div>
+    <script>
+        initiate_chat();
+    </script>
+
 {% endblock %}

@@ -64,7 +64,7 @@ function interested(t){
     t.value = "Interested!";
     t.setAttribute("onclick","not_interested(this)");
 
-    chatroom_id = firebase.database().ref("users/chatrooms").push({'investor_id':contributorId, 'pitcher_id':pitchId}).key;
+    chatroom_id = firebase.database().ref("users/chatrooms").push({'contributor_id':contributorId, 'pitcher_id':pitchId}).key;
     // for pitch
     firebase.database().ref("users/pitches/"+pitcherId+"/"+pitchId).child("contributors").push({"contributor_id":contributorId});
 
@@ -74,8 +74,8 @@ function interested(t){
         firebase.database().ref("users/pitchers/"+pitcherId).update({'chatrooms':current_chatrooms+1});
         //chatrooms = current_chatrooms.toString();
         //chatroom_id = investorId+pitcherId;
-        firebase.database().ref("users/pitchers/"+pitcherId+"/chatrooms_ids").push({"key":chatroom_id, "investor_id":contributorId});
-        firebase.database().ref("users/pitchers/"+pitcherId+"/interested_investors").push({"contributor_id":contributorId});
+        firebase.database().ref("users/pitchers/"+pitcherId+"/chatrooms_ids").push({"key":chatroom_id, "contributor_id":contributorId});
+        firebase.database().ref("users/pitches/"+pitcherId+"/"+pitchId+"/interested_investors").push({"contributor_id":contributorId});
     });
 
     //for investor
@@ -90,21 +90,29 @@ function interested(t){
 }
 
 /////////// chat  ////////
-var element = document.getElementById("maindiv");
+var element;
 var toAdd = document.createDocumentFragment();
-//database polling for new child
-var starCountRef = firebase.database().ref("users/chatrooms/"+ chatId ).on('child_added', function(snapshot){console.log(snapshot.val());snapshot.forEach(function(childSnapshot){addMessage(childSnapshot.key, childSnapshot.val());})});
-
-function addMessage(key,message){
-      var newDiv = document.createElement('div');
-      newDiv.innerHTML = message;
-      newDiv.className = 'demo';
-      toAdd.appendChild(newDiv);
-      element.appendChild(toAdd);
+var chatId;
+function initiate_chat() {
+    chatId = document.getElementById("chatId").value;
+    element = document.getElementById("maindiv");
+    //database polling for new child
+    firebase.database().ref("users/chatrooms/" + chatId + "/messages").on('child_added', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+                addMessage(childSnapshot.key, childSnapshot.val());
+            })
+        }
+    );
 }
-function sendMessage(){
-      var msg = document.getElementById("messagearea");
-      console.log(msg.value);
-      var starCountRef = firebase.database().ref("users/chatrooms/"+ chatId ).push({"investor":msg.value});
+function addMessage(key, message) {
+    var newDiv = document.createElement('div');
+    newDiv.innerHTML = message;
+    newDiv.className = 'demo';
+    toAdd.appendChild(newDiv);
+    element.appendChild(toAdd);
 }
 
+function sendMessage() {
+    var msg = document.getElementById("messagearea");
+    var starCountRef = firebase.database().ref("users/chatrooms/" + chatId + "/messages").push({"contributor": msg.value});
+}

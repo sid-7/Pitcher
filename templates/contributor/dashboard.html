@@ -57,3 +57,16 @@
         </div>
     </div>
 {% endblock %}
+{% block chat %}
+    <div style="overflow: scroll;" id="chats">
+        {% for chat in chats %}
+            <form action="/contributor/chat_window/" method="post">
+            {% csrf_token %}
+                <div>
+                    <input type="hidden" name="chatId" value="{{ chat.0 }}">
+                    <label style="float: left; margin-left:5%;">{{ chat.1 }}</label> <button type="submit" style="float:right; margin-right: 5%;" >Chat</button>
+                </div>
+            </form>
+        {% endfor %}
+    </div>
+{% endblock %}

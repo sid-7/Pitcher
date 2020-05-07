@@ -5,6 +5,6 @@ from . import views
 urlpatterns = [
     path('dashboard/', views.dashboard, name='contributor-dashboard'),
     path('current_projects/', views.current_projects, name='contributor-current_projects'),
-    path('to_chatroom/', views.to_chatroom, name='contributor-to_chatroom'),
+    path('chat_window/', views.chat_window, name='contributor-chat_window'),
     path('logout/', views.logout, name='contributor-logout'),
 ]

@@ -36,6 +36,22 @@ def dashboard(request):
 
     print(interested_pitches)
 
+    #########  get chatrooms  ############
+    chatrooms = firebase_database.child("users").child("contributors").child(local_id).child("chatrooms_ids").get()
+    chat_details = []
+    if (chatrooms.each()):
+        for chatroom in chatrooms.each():
+            print(chatroom.val())
+            if ('pitcher_id' in chatroom.val()):
+                chat_details.append((chatroom.val()['key'], chatroom.val()['pitcher_id'], 'pitchers'))
+
+        for i, (a, b, c) in enumerate(chat_details):
+            investor = firebase_database.child("users").child(c).child(b).get()
+            chat_details[i] = (chat_details[i][0], investor.val().get('firstname'), chat_details[i][2])
+
+    print("CHAT:", chat_details)
+    #########################################
+
     P = []
     for user in data.each():
         pitches = firebase_database.child("users").child("pitches").child(user.key()).get()
@@ -49,22 +65,35 @@ def dashboard(request):
             d['gist'] = p.get('gist')
             d['interested'] = True if (d['pitch_key'] in interested_pitches) else False
             P.append(d)
-
-    # chatrooms = firebase_database.child("users").child("contributors").child(local_id).child("chatrooms_ids").get()
-    # chatroom_ids = []
-    # for chatroom in chatrooms.each():
-    #     chatroom_key = chatroom.val()['key']
-    #     chatroom_ids.append(chatroom_key)
-
-    # print(chatroom_ids)
     print(P)
-    return render(request, 'contributor/dashboard.html', {'pitches': P, 'contributor_key':local_id})
+    return render(request, 'contributor/dashboard.html', {'pitches': P, 'contributor_key':local_id, 'chats':chat_details})
 
 def current_projects(request):
     return render(request, 'contributor/current_projects.html')
 
-def to_chatroom(request):
-    pass
+def chat_window(request):
+    idtoken = request.session['uid']  # getting id of the current logged in user
+    account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
+    local_id = account_info['users'][0]['localId']
+    chatId = request.POST['chatId']
+
+    #########  get chatrooms  ############
+    chatrooms = firebase_database.child("users").child("contributors").child(local_id).child("chatrooms_ids").get()
+    chat_details = []
+    if (chatrooms.each()):
+        for chatroom in chatrooms.each():
+            print(chatroom.val())
+            if ('pitcher_id' in chatroom.val()):
+                chat_details.append((chatroom.val()['key'], chatroom.val()['pitcher_id'], 'pitchers'))
+
+        for i, (a, b, c) in enumerate(chat_details):
+            investor = firebase_database.child("users").child(c).child(b).get()
+            chat_details[i] = (chat_details[i][0], investor.val().get('firstname'), chat_details[i][2])
+
+    print("CHAT:", chat_details)
+    #########################################
+
+    return render(request, "contributor/chat_window.html", {'chatId':chatId, 'chats':chat_details})
 
 def logout(request):
     try:

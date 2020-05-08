@@ -58,7 +58,7 @@
 {% endblock %}
 
 {% block chat %}
-    <div style="overflow: scroll;" id="chats">
+
         {% for chat in chats %}
             <form action="/investor/chat_window/" method="post">
             {% csrf_token %}
@@ -68,5 +68,5 @@
                 </div>
             </form>
         {% endfor %}
-    </div>
+
 {% endblock %}

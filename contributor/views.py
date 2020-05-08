@@ -1,10 +1,6 @@
 from django.shortcuts import render, redirect
-from django.shortcuts import render, redirect
-
 
 import pyrebase
-import firebase_admin
-from firebase_admin import credentials, firestore, storage
 config = {
   "apiKey": "AIzaSyBTlSwWe6lD6NLi8OrDPe49qWIllNgttMI",
   "authDomain": "pitcher-275100.firebaseapp.com",
@@ -12,7 +8,6 @@ config = {
   "storageBucket": "pitcher-275100.appspot.com",
   "serviceAccount": "serviceAccountCredentials.json"
 }
-cred=credentials.Certificate('serviceAccountCredentials.json')
 firebase = pyrebase.initialize_app(config)
 
 firebase_auth = firebase.auth()
@@ -94,6 +89,52 @@ def chat_window(request):
     #########################################
 
     return render(request, "contributor/chat_window.html", {'chatId':chatId, 'chats':chat_details})
+
+def delete_account(request):
+    idtoken = request.session['uid']  # getting id of the current logged in user
+    account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
+    local_id = account_info['users'][0]['localId']
+
+    chatroom_ids = []  # for storing the chatroom ids
+    pitcher_to_pitch_ids = []  # ['pitcher_id','pitch_id']
+
+    # fetching related chatrooms ids of the contributor
+    chatrooms = firebase_database.child("users").child("contributors").child(local_id).child("chatrooms_ids").get()
+    if chatrooms.each():
+        for chatroom in chatrooms.each():
+            chatroom_ids.append(chatroom.val()['key'])
+
+    # removing the related chatrooms
+    for chatroom in chatroom_ids:
+        firebase_database.child("users").child("chatrooms").child(chatroom).remove()
+
+    # fetching pitch ids contributor is interested in
+    interested_pitches = firebase_database.child("users").child("contributors").child(local_id).child("interested_pitches").get()
+    if interested_pitches.each():
+        for pitch in interested_pitches.each():
+            l = []
+            l.append(pitch.val()['pitcher_id'])
+            l.append(pitch.val()['pitch_id'])
+            pitcher_to_pitch_ids.append(l)
+
+    # for deleting in the users/pitches
+    for pitcher in pitcher_to_pitch_ids:
+        contributors = firebase_database.child("users").child("pitches").child(pitcher[0]).child(pitcher[1]).child("contributors").get()
+        if contributors.each():
+            for contributor in contributors.each():
+                if contributor.val()['contributor_id'] == local_id:
+                    firebase_database.child("users").child("pitches").child(pitcher[0]).child(pitcher[1]).child("contributors").child(contributor.key()).remove()
+
+    # removing contributors from pitchers
+    for entry in pitcher_to_pitch_ids:
+        contributors_in_pitchers = firebase_database.child("users").child("pitchers").child(entry[0]).child("interested_contributors").get()
+        if contributors_in_pitchers.each():
+            for contributor in contributors_in_pitchers.each():
+                if contributor.val()['contributor_id'] == local_id:
+                    firebase_database.child("users").child("pitchers").child(entry[0]).child("interested_contributors").child(contributor.key()).remove()
+
+    firebase_database.child("users").child("contributors").child(local_id).remove()
+    return render(request, "users/home.html")
 
 def logout(request):
     try:

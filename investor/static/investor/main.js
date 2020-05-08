@@ -65,7 +65,7 @@ function interested(t){
     t.value = "Interested!";
     t.setAttribute("onclick","not_interested(this)");
 
-    chatroom_id = firebase.database().ref("users/chatrooms").push({'investor_id':investorId, 'pitcher_id':pitchId}).key;
+    chatroom_id = firebase.database().ref("users/chatrooms").push({'investor_id':investorId, 'pitcher_id':pitcherId, 'pitch_id':pitchId}).key;
     // for pitch
     firebase.database().ref("users/pitches/"+pitcherId+"/"+pitchId).child("investors").push({"investor_id":investorId});
 
@@ -76,7 +76,7 @@ function interested(t){
 
         //chatroom_id = investorId+pitcherId;
         firebase.database().ref("users/pitchers/"+pitcherId+"/chatrooms_ids").push({"key":chatroom_id, "investor_id":investorId});
-        firebase.database().ref("users/pitches/"+pitcherId+"/interested_investors").push({"investor_id":investorId});
+        firebase.database().ref("users/pitchers/"+pitcherId+"/interested_investors").push({"investor_id":investorId});
     });
 
     //for investor
@@ -86,7 +86,7 @@ function interested(t){
 
         //chatroom_id = investorId+pitcherId;
         firebase.database().ref("users/investors/"+ investorId+"/chatrooms_ids").push({"key":chatroom_id, "pitcher_id":pitcherId});
-        firebase.database().ref("users/investors/"+ investorId+"/interested_pitches").push({"pitch_id":pitchId});
+        firebase.database().ref("users/investors/"+ investorId+"/interested_pitches").push({"pitch_id":pitchId, 'pitcher_id':pitcherId});
     });
 }
 
@@ -104,16 +104,22 @@ function initiate_chat() {
             })
         }
     );
+    document.getElementById("messagearea").addEventListener("keyup", function(event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        document.getElementById("chatbutton").click();
+      }
+    });
 }
 function addMessage(key, message) {
     var newDiv = document.createElement('div');
     newDiv.innerHTML = message;
-    newDiv.className = 'demo';
+    newDiv.className = key;
     toAdd.appendChild(newDiv);
     element.appendChild(toAdd);
 }
-
 function sendMessage() {
     var msg = document.getElementById("messagearea");
     var starCountRef = firebase.database().ref("users/chatrooms/" + chatId + "/messages").push({"investor": msg.value});
+    document.getElementById("messagearea").value = "";
 }

@@ -25,7 +25,7 @@ SECRET_KEY = 'qvwm56-*o9f$2wpe*78x7g$@gj=7-!z=*@=_g#g9-ll#06ho^^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -127,8 +127,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
+if os.getenv('GAE_APPLICATION', None):
+    STATIC_URL = 'https://storage.googleapis.com/unique-490/'
+else:
+    STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')

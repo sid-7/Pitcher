@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 
-import datetime
 import pyrebase
 ########################  firebase authentication  ##################################
 config = {
@@ -89,7 +88,7 @@ def chat_window(request):
 
     #########  get chatrooms  ############
     chatrooms = firebase_database.child("users").child("investors").child(local_id).child("chatrooms_ids").get()
-    chat_details = []
+    chat_details, name = [], 'None'
     if (chatrooms.each()):
         for chatroom in chatrooms.each():
             print(chatroom.val())
@@ -98,12 +97,61 @@ def chat_window(request):
 
         for i, (a, b, c) in enumerate(chat_details):
             investor = firebase_database.child("users").child(c).child(b).get()
+            if(chat_details[i][0]==chatId):
+                name = investor.val().get('firstname')
             chat_details[i] = (chat_details[i][0], investor.val().get('firstname'), chat_details[i][2])
 
     print("CHAT:", chat_details)
     #########################################
 
-    return render(request, "investor/chat_window.html", {'chatId':chatId, 'chats':chat_details})
+    return render(request, "investor/chat_window.html", {'chatId':chatId, 'name':name, 'chats':chat_details})
+
+def delete_account(request):
+    idtoken = request.session['uid']  # getting id of the current logged in user
+    account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
+    local_id = account_info['users'][0]['localId']
+
+    pitcher_to_pitch_ids = [] # ['pitcher_id','pitch_id']
+
+    chatroom_ids = []
+    chatrooms = firebase_database.child("users").child("investors").child(local_id).child("chatrooms_ids").get()
+    if chatrooms.each():
+        for chatroom in chatrooms.each():
+            chatroom_ids.append(chatroom.val()['key'])
+
+    for chatroom in chatroom_ids:
+        firebase_database.child("users").child("chatrooms").child(chatroom).remove()
+
+
+    interested_pitches = firebase_database.child("users").child("investors").child(local_id).child("interested_pitches").get()
+
+    if interested_pitches.each():
+        for pitch in interested_pitches.each():
+            l=[]
+            l.append(pitch.val()['pitcher_id'])
+            l.append(pitch.val()['pitch_id'])
+            pitcher_to_pitch_ids.append(l)
+
+
+    for pitcher in pitcher_to_pitch_ids:
+        investors = firebase_database.child("users").child("pitches").child(pitcher[0]).child(pitcher[1]).child("investors").get()
+        if investors.each():
+            for investor in investors.each():
+                if investor.val()['investor_id'] == local_id:
+                    firebase_database.child("users").child("pitches").child(pitcher[0]).child(pitcher[1]).child("investors").child(investor.key()).remove()
+
+
+    for entry in pitcher_to_pitch_ids:
+        investors_in_pitchers = firebase_database.child("users").child("pitchers").child(entry[0]).child("interested_investors").get()
+        if investors_in_pitchers.each():
+            for investor in investors_in_pitchers.each():
+                if investor.val()['investor_id'] == local_id:
+                    firebase_database.child("users").child("pitchers").child(entry[0]).child("interested_investors").child(investor.key()).remove()
+
+    firebase_database.child("users").child("investors").child(local_id).remove()
+
+    return render(request, "users/home.html")
+
 
 def logout(request):
     try:

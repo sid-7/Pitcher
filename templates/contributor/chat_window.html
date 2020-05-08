@@ -1,19 +1,22 @@
 {% extends 'contributor/base.html' %}
 
 {% block content %}
-    <div style="border: 2px solid black;height: 100%;width: 100%;">
         <input type="hidden" id="chatId" value="{{ chatId }}">
-        <div id="maindiv" style="">
+
+        <span>{{ name }}</span>
+        <hr>
+        <div id="maindiv" style="height: 80%;"></div>
+
+        <div>
+            <input type="text" id="messagearea" style="float:left; width:90%; height:5%; ">
+            <button id="chatbutton" onclick="sendMessage()" style="width:10%; height:5%;" class="send_btn">Send</button>
         </div>
-        <div >
-            <textarea id="messagearea" rows="1" style="float:left"></textarea>
-            <button id="chatbutton" onclick="sendMessage()">Send</button>
-        </div>
-    </div>
+
     <script>
         initiate_chat();
     </script>
 {% endblock %}
+
 {% block chat %}
     <div style="overflow: scroll;" id="chats">
         {% for chat in chats %}

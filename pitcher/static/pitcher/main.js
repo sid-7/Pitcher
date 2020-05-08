@@ -73,11 +73,17 @@ function initiate_chat() {
             })
         }
     );
+        document.getElementById("messagearea").addEventListener("keyup", function(event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        document.getElementById("chatbutton").click();
+      }
+    });
 }
 function addMessage(key, message) {
     var newDiv = document.createElement('div');
     newDiv.innerHTML = message;
-    newDiv.className = 'demo';
+    newDiv.className = key;
     toAdd.appendChild(newDiv);
     element.appendChild(toAdd);
 }
@@ -86,4 +92,5 @@ function sendMessage() {
     var msg = document.getElementById("messagearea");
     console.log(msg.value);
     var starCountRef = firebase.database().ref("users/chatrooms/" + chatId + "/messages").push({"pitcher": msg.value});
+    document.getElementById("messagearea").value = "";
 }

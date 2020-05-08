@@ -3,15 +3,32 @@
 {% block content %}
     <div style="border: 2px solid black;height: 100%;width: 100%;">
         <input type="hidden" id="chatId" value="{{ chatId }}">
+        <span>{{ name }}</span>
+        <hr>
         <div id="maindiv" style="">
         </div>
-        <div >
-            <textarea id="messagearea" rows="1" style="float:left"></textarea>
-            <button id="chatbutton" onclick="sendMessage()">Send</button>
+
+        <div>
+            <input type="text" id="messagearea" style="float:left; width:90%; height:5%; ">
+            <button id="chatbutton" onclick="sendMessage()" style="width:10%; height:5%;" class="send_btn">Send</button>
         </div>
+
     </div>
     <script>
         initiate_chat();
     </script>
-
+{% endblock %}
+{% block chat %}
+    <div style="overflow: scroll;" id="chats">
+        {% for chat in chats %}
+            <form action="/pitcher/chat_window/" method="post">
+            {% csrf_token %}
+                <div>
+                    <input type="hidden" name="chatId" value="{{ chat.0 }}">
+                    <label style="float: left; margin-left:5%;">{{ chat.1 }}</label> <button type="submit" style="float:right; margin-right: 5%;" >Chat</button>
+                </div>
+            </form>
+            <hr>
+        {% endfor %}
+    </div>
 {% endblock %}

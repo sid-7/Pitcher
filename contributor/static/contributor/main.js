@@ -58,9 +58,10 @@ function not_interested(t){
 
 function interested(t){
     var pitcherId = document.getElementById("myModal").getElementsByClassName("pitcher_key")[0].value;
-    //console.log(document.getElementById("myModal").getElementsByClassName("contributor_key"));
     var contributorId = document.getElementById("myModal").getElementsByClassName("contributor_key")[0].value;
     var pitchId = document.getElementById("myModal").getElementsByClassName("pitch_key")[0].value;
+    console.log("Contributor: ");
+    console.log(pitcherId, contributorId, pitchId);
     t.value = "Interested!";
     t.setAttribute("onclick","not_interested(this)");
 
@@ -75,7 +76,7 @@ function interested(t){
         //chatrooms = current_chatrooms.toString();
         //chatroom_id = investorId+pitcherId;
         firebase.database().ref("users/pitchers/"+pitcherId+"/chatrooms_ids").push({"key":chatroom_id, "contributor_id":contributorId});
-        firebase.database().ref("users/pitches/"+pitcherId+"/"+pitchId+"/interested_investors").push({"contributor_id":contributorId});
+        firebase.database().ref("users/pitchers/"+pitcherId+"/interested_investors").push({"contributor_id":contributorId});
     });
 
     //for investor
@@ -85,7 +86,7 @@ function interested(t){
         //chatrooms = current_chatrooms.toString();
         //chatroom_id = investorId+pitcherId;
         firebase.database().ref("users/contributors/"+ contributorId+"/chatrooms_ids").push({"key":chatroom_id, "pitcher_id":pitcherId});
-        firebase.database().ref("users/contributors/"+ contributorId+"/interested_pitches").push({"pitch_id":pitchId});
+        firebase.database().ref("users/contributors/"+ contributorId+"/interested_pitches").push({"pitch_id":pitchId, 'pitcher_id':pitcherId});
     });
 }
 
@@ -103,11 +104,18 @@ function initiate_chat() {
             })
         }
     );
+    document.getElementById("messagearea").addEventListener("keyup", function(event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        document.getElementById("chatbutton").click();
+      }
+    });
 }
 function addMessage(key, message) {
     var newDiv = document.createElement('div');
     newDiv.innerHTML = message;
-    newDiv.className = 'demo';
+    newDiv.className = key;
+    console.log(key, message);
     toAdd.appendChild(newDiv);
     element.appendChild(toAdd);
 }
@@ -115,4 +123,5 @@ function addMessage(key, message) {
 function sendMessage() {
     var msg = document.getElementById("messagearea");
     var starCountRef = firebase.database().ref("users/chatrooms/" + chatId + "/messages").push({"contributor": msg.value});
+    document.getElementById("messagearea").value = "";
 }

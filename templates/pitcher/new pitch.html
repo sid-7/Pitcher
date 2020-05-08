@@ -1,14 +1,14 @@
 {% extends "pitcher/base.html" %}
 {% block content %}
 
-<div style="text-align: center; align-self: center;width: 50%; margin: 2% 10% 2% 10%;">
-    <form action="/pitcher/new_pitch/" method="POST" enctype="multipart/form-data" style="display: inline" id="pitch_form">
+<div style="margin: 2% 5% 2% 5%;height: 94%; width: 90%">
+    <form action="/pitcher/new_pitch/" method="POST" enctype="multipart/form-data" style="display: inline" id="pitch_form" onsubmit="return validate_and_upload_media()">
         {% csrf_token %}
-        <label>Pitch Title: <input type="text" name="title" placeholder="Title"> </label> <br/>
-        <label>Description: <textarea name="description" placeholder="description"></textarea></label> <br/>
+        <label style="width: 100%">Pitch Title: <input type="text" name="title" placeholder="Title" style="width: 100%;"> </label> <br/>
+        <label style="width: 100%">Description:<br/><textarea name="description" placeholder="description" rows="5" style="width: 100%"></textarea></label> <br/>
         <input type="hidden" id="url" name="url">
-        <label><input type="file" name="file" id="files"></label>Upload file<br/>
-        <input type="button" value="Submit" onclick="upload_media()">
+        <label>Upload file<input type="file" name="file" id="files" accept=".mp4"><br/></label>
+        <input type="submit" value="Submit">
     </form>
 </div>
 

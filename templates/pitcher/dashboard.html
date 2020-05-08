@@ -1,15 +1,13 @@
 {% extends 'pitcher/base.html' %}
 {% block content %}
-    <div style="2px solid black; height: 100%; width:100%;">
-        <div id="pitcher-search" style="border:1px solid lightslategrey;">
-            <form action="">
-                <input type="text" style="width: 80%; margin-right: 1%; margin-left: 1%;" placeholder="search">
-                <input type="submit" value="Search" style="width: 15%; margin-right: 0.5%;">
-            </form>
+    <div>
+        <div id="pitcher-search" style="margin-top:1%;">
+            <input type="text" style="width: 80%; margin-right: 1%; margin-left: 1%;" placeholder="search">
+            <input type="submit" value="Search" style="width: 15%; margin-right: 0.5%;" onclick="search()">
         </div>
         <div id="pitches" class="pitches">
             {% for pitch in pitches %}
-                <div class="pitch" onclick="pitch_click(this);">
+                <div class="pitch" onclick="pitch_click(this)">
                     <input type="hidden" value="{{ pitch.key }}" name="key">
                     <div class="pitch-title">{{ pitch.title }}</div>
                     {% if pitch.status == "active" %}

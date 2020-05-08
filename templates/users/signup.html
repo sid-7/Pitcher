@@ -2,20 +2,20 @@
 {% block content %}
 
 <div style="display: inline-block;width: 50%;height:100%;border: 2px solid black;text-align: left; margin-left: 25%;">
-    <form action="/users/signup/" method="POST">
+    <form action="/users/signup/" method="POST" name="signupform" onsubmit="return validateSignupForm()">
         {% csrf_token %}
-                <div>First name:<input type="text" name="first_name" placeholder="First Name"></div>
-                <div>Last name:   <input type="text" name="last_name" placeholder="Last Name"></div>
-                <div>Email:<input type="text" name="email" placeholder="Email" ></div>
-                <div>Password:<input type="password" name="password" placeholder="password"></div>
-                <div>Confirm Password: <input type="password" name="confirm password" placeholder="confirm password"></div>
-                <div>Role:  <input type="radio" name="role" value="pitcher" style="margin-left: 20px;"><label for="pitcher"> Pitcher</label><br/>
-                    <input type="radio" name="role" value="investor" style="margin-left: 60px;"><label for="investor"> Investor</label><br/>
-                    <input type="radio" name="role" value="contributor" style="margin-left: 60px;"><label for="contributor"> Contributor</label></div>
-            {% if message %}
-                <p style="font-size: 8px; color: red;">{{ message }}</p>
-            {% endif %}
-            <input type="submit" value="Sign Up" style="margin-left: 40%;">
+        <div>First name:<input type="text" name="first_name" placeholder="First Name"></div>
+        <div>Last name:   <input type="text" name="last_name" placeholder="Last Name"></div>
+        <div>Email:<input type="text" name="email" placeholder="Email" ></div>
+        <div>Password:<input type="password" name="password" placeholder="password"></div>
+        <div>Confirm Password: <input type="password" name="confirm password" placeholder="confirm password"></div>
+        <div>Role:  <input type="radio" name="role" value="pitcher" style="margin-left: 20px;"><label for="pitcher"> Pitcher</label><br/>
+            <input type="radio" name="role" value="investor" style="margin-left: 60px;"><label for="investor"> Investor</label><br/>
+            <input type="radio" name="role" value="contributor" style="margin-left: 60px;"><label for="contributor"> Contributor</label></div>
+        {% if message %}
+            <p style="font-size: 8px; color: red;">{{ message }}</p>
+        {% endif %}
+        <input type="submit" value="Sign Up" style="margin-left: 40%;">
     </form>
 </div>
 

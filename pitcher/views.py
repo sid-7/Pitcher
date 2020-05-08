@@ -70,33 +70,19 @@ def new_pitch(request):
     if(len(request.POST)!=0):
         title = request.POST.get('title')
         description = request.POST.get('description')
-        file = request.FILES.get('file')
+        file = request.FILES.get('url')
         status = 'active'
         date = str(datetime.datetime.now())
-        contributors = []
-        investors = []
-        userid = request.session['email']
+
         data = {"title": title, "description": description, "status":status, "date_created":date, "contributors":{}, "investors":{}}
 
         if(file!=None):
-            fs = FileSystemStorage()
-            filename = fs.save(file.name, file)
-            uploaded_file_url = fs.url(filename)
-            #print(uploaded_file_url)
-            #entry = AddDetails(title=title, description=description, video=filename, userid=userid)
-            data["filename"]=filename
-            idtoken = request.session['uid']  # getting id of the current logged in user
-            account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
-            local_id = account_info['users'][0]['localId']
-            outfile = 'media/' + filename
-            firebase_storage.child("pitches/" + local_id + "/" + filename).put(outfile)
-            firebase_database.child('users').child('pitches').child(local_id).push(data)
-        else:
-            #entry = AddDetails(title=title, description=description, video=None, userid=userid)
-            idtoken = request.session['uid']  # getting id of the current logged in user
-            account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
-            local_id = account_info['users'][0]['localId']
-            firebase_database.child('users').child('pitches').child(local_id).push(data)
+            data["url"]=file
+
+        idtoken = request.session['uid']  # getting id of the current logged in user
+        account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
+        local_id = account_info['users'][0]['localId']
+        firebase_database.child('users').child('pitches').child(local_id).push(data)
         return redirect('/pitcher/dashboard')
     else:
         return render(request, 'pitcher/new pitch.html')

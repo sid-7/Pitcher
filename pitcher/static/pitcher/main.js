@@ -17,8 +17,12 @@ function pitch_click(t) {
     var modal = document.getElementById("myModal");
     var btn = t;
     var span = document.getElementsByClassName("close")[0];
-    var all = t.getElementsByTagName('div')
-    console.log(all)
+    btn.onclick = function () {modal.style.display = "block";}
+    span.onclick = function () {modal.style.display = "none";}
+    modal.style.display = "none";
+    modal.style.display = "block";
+
+    var all = t.getElementsByTagName('div');
     document.getElementById('title').innerHTML = all[0].innerHTML;
     document.getElementById('status').innerHTML = all[1].innerHTML;
     document.getElementById('date').innerHTML = all[2].innerHTML;
@@ -33,15 +37,24 @@ function pitch_click(t) {
     k[1].setAttribute('value', key);
 
 
-    btn.onclick = function () {modal.style.display = "block";}
-    span.onclick = function () {modal.style.display = "none";}
     window.onclick = function (event) {
         if (event.target == modal) {modal.style.display = "none";}
     }
 }
 
-function upload_media() {
+function validate_and_upload_media() {
+    if(document.getElementsByName("title")[0].value == ""){
+        alert("Title cannot be empty!");
+        document.getElementsByName("title")[0].focus();
+        return false;
+    }
+    if(document.getElementsByName("description")[0].value == ""){
+        alert("Description cannot be empty!");
+        document.getElementsByName("description")[0].focus();
+        return false;
+    }
     var file = document.getElementById('files').files[0];
+
     //console.log(file);
     if (file != undefined) {
         var storageRef = storage.ref("pitches/");
@@ -51,7 +64,11 @@ function upload_media() {
             document.getElementById("url").value = url;
         });
     }
-    document.getElementById("pitch_form").submit();
+    else{
+        alert("Please add a video!");
+        return false;
+    }
+    return true;
 }
 
 function edit_pitch(){
@@ -80,6 +97,7 @@ function initiate_chat() {
       }
     });
 }
+
 function addMessage(key, message) {
     var newDiv = document.createElement('div');
     newDiv.innerHTML = message;

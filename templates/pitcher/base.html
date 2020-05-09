@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'pitcher/assets/apple-icon-180x180.png' %}">
   <link href="{% static 'pitcher/assets/favicon.ico' %}" rel="icon">
   <link href="" rel="stylesheet">
-  <title>Title page</title>
+  <title>Pitcher</title>
   <link href="{% static 'pitcher/main.550dcf66.css' %}" rel="stylesheet">
   <link href="{% static 'pitcher/main.css' %}" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
@@ -23,19 +23,21 @@
       <nav class="navbar navbar-default active">
         <div class="container">
           <div class="navbar-header">
+              <a class="navbar-brand" href="/pitcher/dashboard" >Pitcher</a>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/pitcher/dashboard" >Pitcher</a>
+
           </div>
           <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{% url 'pitcher-dashboard' %}" >Home</a></li>
-                <li><a href="{% url 'pitcher-delete_pitcher' %}" >Delete ccount</a></li>
                 <li><a href="{% url 'pitcher-new_pitch' %}" >New Pitch</a></li>
+                <li><a href="{% url 'pitcher-chat_window' %}" >Chatrooms</a></li>
+                <li><a href="{% url 'pitcher-delete_pitcher' %}" >Delete Account</a></li>
                 <li><a href="{% url 'pitcher-logout' %}" >Logout</a></li>
             </ul>
           </div>

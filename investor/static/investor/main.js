@@ -14,10 +14,11 @@ function pitch_click(t) {
     var modal = document.getElementById("myModal");
     var btn = t;
     var span = document.getElementsByClassName("close")[0];
-    var all = t.getElementsByTagName('div');
+    span.onclick = function () {modal.style.display = "none";};
     modal.style.display = "none";
     modal.style.display = "block";
 
+    var all = t.getElementsByTagName('div');
     document.getElementById('title').innerHTML = all[0].innerHTML;
     document.getElementById('status').innerHTML = all[1].innerHTML;
     document.getElementById('date').innerHTML = all[2].innerHTML;
@@ -26,7 +27,7 @@ function pitch_click(t) {
     document.getElementById('whole').innerHTML = all[5].innerHTML;
     document.getElementById('contributors').innerHTML = all[6].innerHTML;
     document.getElementById('investors').innerHTML = all[7].innerHTML;
-    document.getElementById('video').getElementsByTagName('source')[0].setAttribute("src", all[7].innerHTML);
+    document.getElementById('video').src = all[8].innerHTML;
 
     var k = document.getElementById('myModal').getElementsByClassName('pitch_key');
     var pitch_key = t.getElementsByTagName("input")[0].value;
@@ -36,7 +37,6 @@ function pitch_click(t) {
     document.getElementById('myModal').getElementsByClassName('pitcher_key')[0].setAttribute('value', pitcher_key)
 
     var interested = t.getElementsByTagName("input")[2].value;
-    console.log(interested);
     if(interested=="True"){
         document.getElementById("interested_button").value = "Interested!";
         document.getElementById("interested_button").setAttribute("onclick","not_interested(this)");
@@ -46,7 +46,6 @@ function pitch_click(t) {
         document.getElementById("interested_button").setAttribute("onclick", "interested(this)");
     }
 
-    btn.onclick = function () {modal.style.display = "block";}
     span.onclick = function () {modal.style.display = "none";}
     window.onclick = function (event) {
         if (event.target == modal) {modal.style.display = "none";}
@@ -56,34 +55,55 @@ function pitch_click(t) {
 function not_interested(t){
     t.value = "Show Interest?"
     t.setAttribute("onclick", "interested(this)");
-    var pitcherId = document.getElementById("myModal").getElementsByClassName("pitcher_key")[0].value;
-    var contributorId = document.getElementById("myModal").getElementsByClassName("contributor_key")[0].value;
-    var pitchId = document.getElementById("myModal").getElementsByClassName("pitch_key")[0].value;
-    
+    var pitcher_Id = document.getElementById("myModal").getElementsByClassName("pitcher_key")[0].value;
+    var investorId = document.getElementById("myModal").getElementsByClassName("investor_key")[0].value;
+    var pitch_Id = document.getElementById("myModal").getElementsByClassName("pitch_key")[0].value;
+    console.log(pitcher_Id, investorId, pitch_Id);
     // deleting related chatrooms
     firebase.database().ref("users/investors/"+investorId+"/chatrooms_ids").once("value", function(snapShot){
-      snapShot.forEach(function(childSnapshot){
-          if(childSnapshot.val()['pitch_id'] == pitch_Id){
-              firebase.database().ref("users/chatrooms/" + childSnapshot.val()['key']).remove();
-          }
-      });
-    });
-    //deleting investors in pitches
-    firebase.database().ref("users/pitches/"+ pitcher_Id + "/" + pitch_Id + "/investors").once("value", function(snapShot){
         snapShot.forEach(function(childSnapshot){
-          if(childSnapshot.val()['investor_id'] == investorId){
-            firebase.database().ref("users/pitches/"+ pitcher_Id + "/" + pitch_Id + "/investors" + "/" + childSnapshot.key).remove();
-          }
+            console.log(childSnapshot.val()['pitch_id']);
+            if(childSnapshot.val()['pitch_id'] == pitch_Id){
+                console.log(childSnapshot.val());
+                firebase.database().ref("users/chatrooms/" + childSnapshot.val()['key']).remove();
+                firebase.database().ref("users/investors/"+investorId+"/chatrooms_ids/"+ childSnapshot.key).remove();
+            }
+        });
+    });
+    firebase.database().ref("users/investors/"+investorId+"/interested_pitches").once("value", function(snapShot){
+        snapShot.forEach(function(childSnapshot) {
+            if(childSnapshot.val()['pitch_id']==pitch_Id){
+                firebase.database().ref("users/investors/"+investorId+"/interested_pitches/"+childSnapshot.key).remove();
+            }
+        });
+    });
+    firebase.database().ref("users/pitchers/"+ pitcher_Id + "/chatrooms_ids").once("value", function(snapShot) {
+        snapShot.forEach(function(childSnapshot) {
+            if((childSnapshot.val()['investor_id'] == investorId) && (childSnapshot.val()['pitch_id'] == pitch_Id)){
+                firebase.database().ref("users/pitchers/"+ pitcher_Id + "/chatrooms_ids/"+ childSnapshot.key).remove();
+            }
         });
     });
 
-
+    //deleting investors in pitches
+    firebase.database().ref("users/pitches/"+ pitcher_Id + "/" + pitch_Id + "/investors").once("value", function(snapShot){
+        snapShot.forEach(function(childSnapshot){
+            console.log(childSnapshot.val()['investor_id']);
+            if(childSnapshot.val()['investor_id'] == investorId){
+                console.log(childSnapshot.val());
+                firebase.database().ref("users/pitches/"+ pitcher_Id + "/" + pitch_Id + "/investors" + "/" + childSnapshot.key).remove();
+            }
+        });
+    });
     //deleting interested investors from the pitchers
     firebase.database().ref("users/pitchers/"+ pitcher_Id + "/interested_investors").once("value", function(snapShot){
         snapShot.forEach(function(childSnapshot){
-          if((childSnapshot.val()['investor_id'] == investorId) && (childSnapshot.val()['pitch_id'] == pitchId)){
-                          firebase.database().ref("users/pitchers/"+ pitcher_Id + "/interested_investors/" + childSnapshot.key).remove();
-          }
+            console.log(childSnapshot.val()['investor_id']);
+            console.log(childSnapshot.val());
+            if((childSnapshot.val()['investor_id'] == investorId) && (childSnapshot.val()['pitch_id'] == pitch_Id)){
+                console.log(childSnapshot.val());
+                firebase.database().ref("users/pitchers/"+ pitcher_Id + "/interested_investors/" + childSnapshot.key).remove();
+            }
         });
     });
 }
@@ -92,8 +112,6 @@ function interested(t){
     var pitcherId = document.getElementById("myModal").getElementsByClassName("pitcher_key")[0].value;
     var investorId = document.getElementById("myModal").getElementsByClassName("investor_key")[0].value;
     var pitchId = document.getElementById("myModal").getElementsByClassName("pitch_key")[0].value;
-    console.log("Investor: ");
-    console.log(pitcherId, investorId, pitchId);
     t.value = "Interested!";
     t.setAttribute("onclick","not_interested(this)");
 
@@ -107,8 +125,8 @@ function interested(t){
         firebase.database().ref("users/pitchers/"+pitcherId).update({'chatrooms':current_chatrooms+1});
 
         //chatroom_id = investorId+pitcherId;
-        firebase.database().ref("users/pitchers/"+pitcherId+"/chatrooms_ids").push({"key":chatroom_id, "investor_id":investorId});
-        firebase.database().ref("users/pitchers/"+pitcherId+"/interested_investors").push({"investor_id":investorId});
+        firebase.database().ref("users/pitchers/"+pitcherId+"/chatrooms_ids").push({"key":chatroom_id, "investor_id":investorId, 'pitch_id':pitchId});
+        firebase.database().ref("users/pitchers/"+pitcherId+"/interested_investors").push({"pitch_id":pitchId, "investor_id":investorId});
     });
 
     //for investor
@@ -117,7 +135,7 @@ function interested(t){
         firebase.database().ref("users/investors/"+investorId).update({'chatrooms':current_chatrooms+1});
 
         //chatroom_id = investorId+pitcherId;
-        firebase.database().ref("users/investors/"+ investorId+"/chatrooms_ids").push({"key":chatroom_id, "pitcher_id":pitcherId});
+        firebase.database().ref("users/investors/"+ investorId+"/chatrooms_ids").push({"key":chatroom_id, "pitcher_id":pitcherId, 'pitch_id':pitchId});
         firebase.database().ref("users/investors/"+ investorId+"/interested_pitches").push({"pitch_id":pitchId, 'pitcher_id':pitcherId});
     });
 }

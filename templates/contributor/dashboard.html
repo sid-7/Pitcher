@@ -1,4 +1,3 @@
-{#contirbutor/dashboard.html#}
 {% extends 'contributor/base.html' %}
 {% block content %}
     <div>
@@ -45,8 +44,7 @@
                 <div id="whole"></div>
                 <div id="summary"></div>
                 <div id="files">
-                    <video id="video" width="320" height="240"  controls >
-                        <source src="https://storage.googleapis.com/unique-490/Friends.mp4" type="video/mp4">
+                    <video id="video" width="320" height="240"  controls autoplay name="media" type="video/mp4" src="">
                             <p>Your browser does not support the video element.</p>
                     </video>
                 </div>
@@ -56,8 +54,8 @@
         </div>
     </div>
 {% endblock %}
+
 {% block chat %}
-    <div style="overflow: scroll;" id="chats">
         {% for chat in chats %}
             <form action="/contributor/chat_window/" method="post">
             {% csrf_token %}
@@ -67,5 +65,4 @@
                 </div>
             </form>
         {% endfor %}
-    </div>
 {% endblock %}

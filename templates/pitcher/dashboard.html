@@ -8,7 +8,9 @@
         <div id="pitches" class="pitches">
             {% for pitch in pitches %}
                 <div class="pitch" onclick="pitch_click(this)">
-                    <input type="hidden" value="{{ pitch.key }}" name="key">
+                    <input type="hidden" value="{{ pitch.pitch_key }}" name="pitch_key">
+                    <input type="hidden" value="{{ pitch.pitcher_key }}" name="pitcher_key">
+                    <input type="hidden" value="{{ pitch.interested }}" name="interested">
                     <div class="pitch-title">{{ pitch.title }}</div>
                     {% if pitch.status == "active" %}
                         <div class="pitch-status" style="color:green;">{{ pitch.status }}</div>
@@ -18,7 +20,6 @@
                     <div class="pitch-date">{{ pitch.date }}</div>
                     <div class="pitch-gist">{{ pitch.gist }}</div>
                     <div class="pitch-tags">{{ pitch.tags }}</div>
-
                     <div class="pitch-body" hidden>{{ pitch.body }}</div>
                     <div class="pitch-contributors" hidden>{{ pitch.contributors }}</div>
                     <div class="pitch-investors" hidden>{{ pitch.investors }}</div>
@@ -41,13 +42,21 @@
                 <input type="hidden" name="key" class="key">
                 <input type="submit" style="float: right; margin-top: 20px;margin-left: 25px;cursor: pointer;" value="delete">
             </form>
+                <input type="hidden" name="pitch_key" class="pitch_key">
+                <input type="hidden" name="pitcher_key" class="pitcher_key">
+                <input type="hidden" name="investor_key" class="investor_key" value="{{ investor_key }}">
+
                 <div id="title"></div>
                 <div id="status"></div>
                 <div id="date" hidden></div>
                 <div id="gist" hidden></div>
                 <div id="whole"></div>
                 <div id="summary"></div>
-                <div id="files"></div>
+                <div id="files">
+                    <video id="video" width="320" height="240"  controls autoplay name="media" type="video/mp4" src="">
+                            <p>Your browser does not support the video element.</p>
+                    </video>
+                </div>
                 <div id="contributors"></div>
                 <div id="investors"></div>
                 <div id="tags"></div>
@@ -56,16 +65,16 @@
 {% endblock %}
 
 {% block chat %}
-    <div id="chats">
         {% for chat in chats %}
-            <form action="/pitcher/chat_window/" method="post">
-            {% csrf_token %}
-                <div>
-                    <input type="hidden" name="chatId" value="{{ chat.0 }}">
-                    <label style="float: left; margin-left:5%;">{{ chat.1 }}</label> <button type="submit" style="float:right; margin-right: 5%;" >Chat</button>
-                </div>
-            </form>
-            <br/>
+            <div style="border: 1px solid black; margin: 2px 2px 2px 2px;">
+                <form action="/pitcher/chat_window/" method="post" >
+                {% csrf_token %}
+                    <div>
+                        <input type="hidden" name="chatId" value="{{ chat.0 }}">
+                        <label style="float: left; margin-left:5%;">{{ chat.1 }}</label> <button type="submit" style="float:right; margin-right: 5%;" >Chat</button>
+                    </div>
+                </form>
+                <hr>
+            </div>
         {% endfor %}
-    </div>
 {% endblock %}

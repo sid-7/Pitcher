@@ -1,18 +1,14 @@
 {% extends 'investor/base.html' %}
 
 {% block content %}
-
-        <input type="hidden" id="chatId" value="{{ chatId }}">
-
-        <span>{{ name }}</span>
-        <hr>
-        <div id="maindiv" style="height: 80%;"></div>
-
-        <div>
-            <input type="text" id="messagearea" style="float:left; width:90%; height:5%; ">
-            <button id="chatbutton" onclick="sendMessage()" style="width:10%; height:5%;" class="send_btn">Send</button>
-        </div>
-
+    <input type="hidden" id="chatId" value="{{ chatId }}">
+    <span>{{ name }}</span>
+    <hr>
+    <div id="maindiv" style="height: 80%;"></div>
+    <div>
+        <input type="text" id="messagearea" style="float:left; width:90%; height:5%; ">
+        <button id="chatbutton" onclick="sendMessage()" style="width:10%; height:5%;" class="send_btn">Send</button>
+    </div>
     <script>
         initiate_chat();
     </script>
@@ -31,5 +27,4 @@
                 <hr>
             </div>
         {% endfor %}
-
 {% endblock %}

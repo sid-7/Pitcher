@@ -8,17 +8,14 @@ var firebaseConfig = {
     appId: '1:1008306122255:web:58559788fa73c384fcbd7a',
     measurementId: 'G-GPL016L81F',
     };
-
 var fb= firebase.initializeApp(firebaseConfig);
-
 var storage = firebase.storage();
 
 function pitch_click(t) {
     var modal = document.getElementById("myModal");
     var btn = t;
     var span = document.getElementsByClassName("close")[0];
-    btn.onclick = function () {modal.style.display = "block";}
-    span.onclick = function () {modal.style.display = "none";}
+    span.onclick = function () {modal.style.display = "none";};
     modal.style.display = "none";
     modal.style.display = "block";
 
@@ -31,6 +28,9 @@ function pitch_click(t) {
     document.getElementById('whole').innerHTML = all[5].innerHTML;
     document.getElementById('contributors').innerHTML = all[6].innerHTML;
     document.getElementById('investors').innerHTML = all[7].innerHTML;
+    console.log("video URL", all[8].innerHTML);
+    document.getElementById('video').src = all[8].innerHTML;
+
     var k = document.getElementById('myModal').getElementsByClassName('key');
     var key = t.getElementsByTagName("input")[0].value;
     k[0].setAttribute('value', key);
@@ -41,7 +41,32 @@ function pitch_click(t) {
         if (event.target == modal) {modal.style.display = "none";}
     }
 }
-
+function upload(){
+    var file = document.getElementById('files').files[0];
+    //console.log(file);
+    if (file != undefined) {
+        const promices = [];
+        const upload_task = storage.ref("pitches").put(file);
+        promices.push(upload_task);
+        upload_task.on('state_changed', snapshot => {
+            const progress = (snapshot.bytesTransfered / snapshot.totalBytes)*100;
+        }, error =>{
+            console.log(error);
+        }, () =>{
+            upload_task.snapshot.ref.getDownloadURL().then(downloadURL => {
+                console.log(downloadURL);
+                document.getElementById("url").setAttribute("value", downloadURL);
+                document.getElementById("url").value = downloadURL;
+                console.log(document.forms['new_pitch']);
+                alert("File is uploaded");
+            } );
+        } );
+    }
+    else{
+        alert("Please add a video!");
+        return false;
+    }
+}
 function validate_and_upload_media() {
     if(document.getElementsByName("title")[0].value == ""){
         alert("Title cannot be empty!");
@@ -51,21 +76,6 @@ function validate_and_upload_media() {
     if(document.getElementsByName("description")[0].value == ""){
         alert("Description cannot be empty!");
         document.getElementsByName("description")[0].focus();
-        return false;
-    }
-    var file = document.getElementById('files').files[0];
-
-    //console.log(file);
-    if (file != undefined) {
-        var storageRef = storage.ref("pitches/");
-        var thisRef = storageRef.child(file.name).put(file);
-        storageRef.child(file.name).getDownloadURL().then(function (url) {
-            console.log(url);
-            document.getElementById("url").value = url;
-        });
-    }
-    else{
-        alert("Please add a video!");
         return false;
     }
     return true;

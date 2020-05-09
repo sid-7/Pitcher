@@ -27,8 +27,7 @@
 }
 .pitch {
 	border: 1px solid lightblue;
-	border-radius: 10%;
-	background-color: #aeaefe;
+	background-color: lightgrey;
 	margin: 2px 2px 2px 2px;
 }
 .pitch-table {

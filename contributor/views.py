@@ -29,7 +29,7 @@ def dashboard(request):
     else:
         interested_pitches = [x['pitch_id'] for x in (dict(firebase_database.child("users").child("investors").child(local_id).child('interested_pitches').get().val()).values())]
 
-    print(interested_pitches)
+    #print(interested_pitches)
 
     #########  get chatrooms  ############
     chatrooms = firebase_database.child("users").child("contributors").child(local_id).child("chatrooms_ids").get()
@@ -44,7 +44,7 @@ def dashboard(request):
             investor = firebase_database.child("users").child(c).child(b).get()
             chat_details[i] = (chat_details[i][0], investor.val().get('firstname'), chat_details[i][2])
 
-    print("CHAT:", chat_details)
+    #print("CHAT:", chat_details)
     #########################################
 
     P = []
@@ -55,23 +55,26 @@ def dashboard(request):
             d = {'pitch_key': pitch.key(), "pitcher_key": user.key(), 'title': p.get('title'),
                  'body': p.get('description'), 'date': p.get('date_created'),
                  'status': p.get('status'), "conrtibutors": p.get('contributors'), "investors": p.get('investors')}
-            d['file'] = "https://storage.googleapis.com/unique-490/Friends.mp4"  # p.get('filename')
+            d['file'] = p.get('file')
             d['tags'] = p.get('tags')
             d['gist'] = p.get('gist')
             d['interested'] = True if (d['pitch_key'] in interested_pitches) else False
             P.append(d)
-    print(P)
+
     return render(request, 'contributor/dashboard.html', {'pitches': P, 'contributor_key':local_id, 'chats':chat_details})
 
 def current_projects(request):
+
     return render(request, 'contributor/current_projects.html')
 
 def chat_window(request):
     idtoken = request.session['uid']  # getting id of the current logged in user
     account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
     local_id = account_info['users'][0]['localId']
-    chatId = request.POST['chatId']
-
+    if ('chatId' in request.POST):
+        chatId = request.POST['chatId']
+    else:
+        chatId = ''
     #########  get chatrooms  ############
     chatrooms = firebase_database.child("users").child("contributors").child(local_id).child("chatrooms_ids").get()
     chat_details = []

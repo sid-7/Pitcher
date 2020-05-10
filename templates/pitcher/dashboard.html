@@ -1,5 +1,8 @@
 {% extends 'pitcher/base.html' %}
 {% block content %}
+    <script type="text/javascript">
+        document.getElementById("content").style.overflow="scroll";
+    </script>
     <div>
         <div id="pitcher-search" style="margin-top:1%;">
             <input type="text" style="width: 80%; margin-right: 1%; margin-left: 1%;" placeholder="search">
@@ -19,7 +22,8 @@
                     {% endif %}
                     <div class="pitch-date">{{ pitch.date }}</div>
                     <div class="pitch-gist">{{ pitch.gist }}</div>
-                    <div class="pitch-tags">{{ pitch.tags }}</div>
+                    <div class="pitch-tags" style="text: 8px;border: #aeaefe 1px solid;margin: 1px 1px 1px 1px">| {% for tag in pitch.tags %}{{ tag }} | {% endfor %}
+                    </div>
                     <div class="pitch-body" hidden>{{ pitch.body }}</div>
                     <div class="pitch-contributors" hidden>{{ pitch.contributors }}</div>
                     <div class="pitch-investors" hidden>{{ pitch.investors }}</div>

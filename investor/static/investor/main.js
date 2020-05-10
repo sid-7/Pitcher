@@ -14,19 +14,19 @@ function pitch_click(t) {
     var modal = document.getElementById("myModal");
     var btn = t;
     var span = document.getElementsByClassName("close")[0];
-    span.onclick = function () {modal.style.display = "none";};
+    span.onclick = function () {modal.style.display = "none";document.getElementById('video').src = '';};
     modal.style.display = "none";
     modal.style.display = "block";
 
     var all = t.getElementsByTagName('div');
-    document.getElementById('title').innerHTML = all[0].innerHTML;
-    document.getElementById('status').innerHTML = all[1].innerHTML;
-    document.getElementById('date').innerHTML = all[2].innerHTML;
-    document.getElementById('gist').innerHTML = all[3].innerHTML;
-    document.getElementById('tags').innerHTML = all[4].innerHTML;
-    document.getElementById('whole').innerHTML = all[5].innerHTML;
-    document.getElementById('contributors').innerHTML = all[6].innerHTML;
-    document.getElementById('investors').innerHTML = all[7].innerHTML;
+    document.getElementById('title').innerHTML = "<b>Title: </b>" + all[0].innerHTML;
+    document.getElementById('status').innerHTML = "<b>Status: </b>" + all[1].innerHTML;
+    document.getElementById('date').innerHTML = "<b>Date: </b>" + all[2].innerHTML;
+    document.getElementById('gist').innerHTML = "<b>GIST: </b>" + all[3].innerHTML;
+    document.getElementById('tags').innerHTML = "<b>Tags: </b>" + all[4].innerHTML;
+    document.getElementById('whole').innerHTML = "<b>Description: </b>" + all[5].innerHTML;
+    document.getElementById('contributors').innerHTML = "<b>Number of Contributors: </b>" + all[6].innerHTML;
+    document.getElementById('investors').innerHTML = "<b>Number of Investors: </b>" + all[7].innerHTML;
     document.getElementById('video').src = all[8].innerHTML;
 
     var k = document.getElementById('myModal').getElementsByClassName('pitch_key');
@@ -48,7 +48,7 @@ function pitch_click(t) {
 
     span.onclick = function () {modal.style.display = "none";}
     window.onclick = function (event) {
-        if (event.target == modal) {modal.style.display = "none";}
+        if (event.target == modal) {modal.style.display = "none";document.getElementById('video').src = '';}
     }
 }
 
@@ -167,6 +167,7 @@ function addMessage(key, message) {
     newDiv.className = key;
     toAdd.appendChild(newDiv);
     element.appendChild(toAdd);
+    element.scrollTop = element.scrollHeight;
 }
 function sendMessage() {
     var msg = document.getElementById("messagearea");

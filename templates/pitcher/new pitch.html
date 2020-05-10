@@ -1,15 +1,28 @@
 {% extends "pitcher/base.html" %}
 {% block content %}
-
 <div style="margin: 2% 5% 2% 5%;height: 94%; width: 90%">
     <form action="/pitcher/new_pitch/" method="POST" enctype="multipart/form-data" name="new_pitch" style="display: inline" id="pitch_form" onsubmit="return validate_and_upload_media()">
         {% csrf_token %}
         <label style="width: 100%">Pitch Title: <input type="text" name="title" placeholder="Title" style="width: 100%;"> </label> <br/>
-        <label style="width: 100%">Description:<br/><textarea name="description" placeholder="description" rows="5" style="width: 100%"></textarea></label> <br/>
+        <label style="width: 100%">Description:<br/><textarea name="description" placeholder="description" rows="9" style="width: 100%"></textarea></label> <br/>
         <input type="hidden" id="url" name="url">
         <label>Upload file<input type="file" name="file" id="files" accept=".mp4" onchange="upload()"><br/></label>
         <input type="button" value="Submit" onclick="document.forms['new_pitch'].submit()">
     </form>
 </div>
+{% endblock %}
 
+{% block chat %}
+        {% for chat in chats %}
+            <div style="border: 1px solid black; margin: 2px 2px 2px 2px;">
+                <form action="/pitcher/chat_window/" method="post" >
+                {% csrf_token %}
+                    <div>
+                        <input type="hidden" name="chatId" value="{{ chat.0 }}">
+                        <label style="float: left; margin-left:5%;">{{ chat.1 }}</label> <button type="submit" style="float:right; margin-right: 5%;" >Chat</button>
+                    </div>
+                </form>
+                <hr>
+            </div>
+        {% endfor %}
 {% endblock %}

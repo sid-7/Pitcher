@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
-from .functs import summarizer
+from .functs import summarizer, extract_tags
 import datetime
 import pyrebase
 ########################  firebase authentication  ##################################
@@ -38,7 +38,7 @@ def dashboard(request):
             for i,(a,b,c) in enumerate(chat_details):
                 print("users/{}/{}".format(c,b))
                 investor = firebase_database.child("users").child(c).child(b).get()
-                chat_details[i] = (chat_details[i][0], investor.val()['firstname'], chat_details[i][2])
+                chat_details[i] = (chat_details[i][0], investor.val().get('firstname', "NoName"), chat_details[i][2])
         print("chats for pitcher {}: {}".format(local_id[:5], chat_details))
         #########################################
         data = firebase_database.child("users").child("pitches").child(local_id).child().get().val()
@@ -57,9 +57,9 @@ def dashboard(request):
             investors = '0'
             if(d):
                 investors = len([x['investor_id'] for x in dict(d).values()])
-            d = {'key':pitch.key(), 'title': p.get('title', "No Title Found") , 'body': p.get('description', "No Description Found"), 'date': p.get('date_created'),
+            d = {'pitch_key':pitch.key(), 'title': p.get('title', "No Title Found") , 'body': p.get('description', "No Description Found"), 'date': p.get('date_created'),
                  'status': p.get('status', "active"), 'file': p.get("file"), "conrtibutors": contributors, "investors": investors}
-            d['tags'] = [p.get('filename')]
+            d['tags'] = p.get('tags')
             d['gist'] = p.get('gist')
             P.append(d)
         print("Pitches for {}: {}".format(local_id, P))
@@ -68,6 +68,13 @@ def dashboard(request):
         return redirect("users/home")
 
 def new_pitch(request):
+    try:
+        idtoken = request.session['uid']  # getting id of the current logged in user
+        account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
+        local_id = account_info['users'][0]['localId']
+    except:
+        return logout(request)
+
     if(len(request.POST)!=0):
         title = request.POST.get('title')
         description = request.POST.get('description')
@@ -75,9 +82,11 @@ def new_pitch(request):
         status = 'active'
         date = str(datetime.datetime.now())
 
-        data = {"title": title, "description": description, "gist":summarizer(description), "status":status, "date_created":date, "contributors":{}, "investors":{}}
+        data = {"title": title, "description": description, "gist":summarizer(description),
+                "status":status, "date_created":date,
+                "contributors":{}, "investors":{}, "tags":extract_tags(description)}
 
-        print("POST:", request.POST, url)
+        print("POST:", request.POST)
         #file = firebase_storage.child("pitches").get_url(file)
         data["file"] = url
 
@@ -88,10 +97,32 @@ def new_pitch(request):
         firebase_database.child('users').child('pitches').child(local_id).push(data)
         return redirect('/pitcher/dashboard')
     else:
-        return render(request, 'pitcher/new pitch.html')
+        #########  get chatrooms  ############
+        chatrooms = firebase_database.child("users").child("pitchers").child(local_id).child("chatrooms_ids").get()
+        chat_details = []
+        if (chatrooms.each()):
+            for chatroom in chatrooms.each():
+                if ('investor_id' in chatroom.val()):
+                    chat_details.append((chatroom.val()['key'], chatroom.val()['investor_id'], 'investors'))
+                elif ('contributor_id' in chatroom.val()):
+                    chat_details.append((chatroom.val()['key'], chatroom.val()['contributor_id'], 'contributors'))
+
+            for i, (a, b, c) in enumerate(chat_details):
+                print("users/{}/{}".format(c, b))
+                investor = firebase_database.child("users").child(c).child(b).get()
+                chat_details[i] = (chat_details[i][0], investor.val()['firstname'], chat_details[i][2])
+        print("chats for pitcher {}: {}".format(local_id[:5], chat_details))
+        #########################################
+        return render(request, 'pitcher/new pitch.html', {'chats':chat_details})
 
 def edit_pitch(request):
-    print("POST",request.POST)
+    try:
+        idtoken = request.session['uid']  # getting id of the current logged in user
+        account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
+        local_id = account_info['users'][0]['localId']
+    except:
+        return logout(request)
+
     if(len(request.POST) >2):
         key = request.POST.get('key')
         title = request.POST.get('title')
@@ -104,7 +135,6 @@ def edit_pitch(request):
         userid = request.session['email']
         data = {"title": title, "description": description, "gist":summarizer(description), "status": status, "date_created": date, "contributors": {},
                 "investors": {}}
-
         if (file != None):
             fs = FileSystemStorage()
             filename = fs.save(file.name, file)
@@ -119,29 +149,44 @@ def edit_pitch(request):
             idtoken = request.session['uid']  # getting id of the current logged in user
             account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
             local_id = account_info['users'][0]['localId']
-        #data = firebase_database.child("users").child("pitches").child(local_id).get()
-        #pitch_id = ""
-        #for pitch in data.each():
-        #    temp = pitch.val()
-        #    if temp['title'] == title:
-        #        pitch_id = temp.key()
-        #        break
 
         firebase_database.child("users").child("pitches").child(local_id).child(key).update(data)
         return redirect("/pitcher/dashboard")
     else:
         key = request.POST.get('key')
-        idtoken = request.session['uid']  # getting id of the current logged in user
-        account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
-        local_id = account_info['users'][0]['localId']
         data = firebase_database.child("users").child("pitches").child(local_id).child(key).get().val()
         title = data['title']
         description = data['description']
         status = data['status']
         active = True if status=='active' else False
-        return render(request, 'pitcher/edit_pitch.html', {'title':title, 'body':description,'key':key, 'active':active})
+
+        #########  get chatrooms  ############
+        chatrooms = firebase_database.child("users").child("pitchers").child(local_id).child("chatrooms_ids").get()
+        chat_details = []
+        if (chatrooms.each()):
+            for chatroom in chatrooms.each():
+                if ('investor_id' in chatroom.val()):
+                    chat_details.append((chatroom.val()['key'], chatroom.val()['investor_id'], 'investors'))
+                elif ('contributor_id' in chatroom.val()):
+                    chat_details.append((chatroom.val()['key'], chatroom.val()['contributor_id'], 'contributors'))
+
+            for i, (a, b, c) in enumerate(chat_details):
+                print("users/{}/{}".format(c, b))
+                investor = firebase_database.child("users").child(c).child(b).get()
+                chat_details[i] = (chat_details[i][0], investor.val()['firstname'], chat_details[i][2])
+        print("chats for pitcher {}: {}".format(local_id[:5], chat_details))
+        #########################################
+
+        return render(request, 'pitcher/edit_pitch.html', {'title':title, 'body':description,'key':key, 'active':active, 'chats':chat_details})
 
 def delete_pitch(request):
+    try:
+        idtoken = request.session['uid']  # getting id of the current logged in user
+        account_info = firebase_auth.get_account_info(idtoken)  # to get account info of the user
+        local_id = account_info['users'][0]['localId']
+    except:
+        return logout(request)
+
     pitch_id = request.POST.get('key')
 
     idtoken = request.session['uid']  # getting id of the current logged in user
@@ -198,9 +243,11 @@ def chat_window(request):
     if ('chatId' in request.POST):
         chatId = request.POST['chatId']
     else:
-        chatId = ''#########  get chatrooms  ############
+        chatId = ''
+    #########  get chatrooms  ############
     chatrooms = firebase_database.child("users").child("pitchers").child(local_id).child("chatrooms_ids").get()
     chat_details = []
+    name = ''
     if (chatrooms.each()):
         for chatroom in chatrooms.each():
             if ('investor_id' in chatroom.val()):
@@ -211,13 +258,14 @@ def chat_window(request):
         for i, (a, b, c) in enumerate(chat_details):
             print("users/{}/{}".format(c, b))
             investor = firebase_database.child("users").child(c).child(b).get()
+            if(chat_details[i][0]==chatId):
+                name = investor.val().get('firstname', "noname")
             chat_details[i] = (chat_details[i][0], investor.val().get('firstname'), chat_details[i][2])
 
     print("chats for {}: {}".format(local_id, chat_details))
     #########################################
 
-    return render(request, "pitcher/chat_window.html", {'chatId':chatId, 'chats':chat_details})
-
+    return render(request, "pitcher/chat_window.html", {'chatId':chatId, 'chats':chat_details, 'name':name})
 
 def logout(request):
     try:

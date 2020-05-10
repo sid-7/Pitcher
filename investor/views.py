@@ -97,8 +97,9 @@ def current_projects(request):
             pitches = firebase_database.child("users").child("pitches").child(user.key()).get()
             for pitch in pitches.each():
                 p = pitch.val()
-                d = {'pitch_key': pitch.key(), "pitcher_key":user.key(), 'title': p.get('title'), 'body': p.get('description'),'date': p.get('date_created'),
-                     'status': p.get('status'), "conrtibutors": p.get('contributors'), "investors": p.get('investors')}
+                d = {'pitch_key': pitch.key(), "pitcher_key":user.key(), 'title': p.get('title'), 'body': p.get('description'),
+                     'date': p.get('date_created'),'status': p.get('status'), "conrtibutors": p.get('contributors'),
+                     "investors": p.get('investors')}
                 d['file'] = p.get('file')
                 d['tags'] = p.get('tags')
                 d['gist'] = p.get('gist')

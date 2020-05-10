@@ -10,13 +10,13 @@
                 <input type="radio" name="role" value="contributor" style="margin-left: -83.5px;"><label for="contributor"> Contributor</label></div>
             </pre>
             {% if message %}
-                <p style="font-size: 8px; color: red;">{{ message }}</p>
+                <p style="font-size: 18px; color: red;margin-left: 2%;">{{ message }}</p>
             {% endif %}
             <input type="submit" value="Login" style="margin-left: 40%;"><br/>
     </form>
-    <form action="/users/reset_password/" method="POST">
+    <form action="/users/reset_password/" method="POST" style="margin-left: 30%" name="forgot_password">
         {% csrf_token %}
-        <input type="submit" value="Forgot Password">
+        <a onclick="document.forms['forgot_password'].submit()" id="forgot_pwd" style="cursor:pointer;">Forgot Password</a>
     </form>
 </div>
 {% endblock %}

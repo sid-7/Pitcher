@@ -46,16 +46,18 @@ function upload(){
         const promices = [];
         const upload_task = storage.ref("pitches").put(file);
         promices.push(upload_task);
+        setTimeout(alert("File is baing Uploaded. Please wait"),500);
         upload_task.on('state_changed', snapshot => {
             const progress = (snapshot.bytesTransfered / snapshot.totalBytes)*100;
+            console.log(progress)
         }, error =>{
             console.log(error);
         }, () =>{
             upload_task.snapshot.ref.getDownloadURL().then(downloadURL => {
-                console.log(downloadURL);
+                //console.log(downloadURL);
                 document.getElementById("url").setAttribute("value", downloadURL);
                 document.getElementById("url").value = downloadURL;
-                console.log(document.forms['new_pitch']);
+                //console.log(document.forms['new_pitch']);
                 alert("File is uploaded");
             } );
         } );

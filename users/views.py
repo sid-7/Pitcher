@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from requests.exceptions import HTTPError
 import datetime
 import pyrebase
 ########################  firebase authentication  ##################################
@@ -27,13 +27,26 @@ def login(request):
         # user = UserRegistration.objects.filter(email=email)
         # # user = auth.authenticate(username=username,password=password)
         # user_values = user.values()
-        user = firebase_auth.sign_in_with_email_and_password(email, password)
+        try:
+            user = firebase_auth.sign_in_with_email_and_password(email, password)
+        except HTTPError as e:
+            print("->", e)
+            return render(request, 'users/login.html', {'message': "invalid credentials"})
+
         account_info = firebase_auth.get_account_info(user['idToken'])  # to get account info of the user
         session_id = user['idToken']
         request.session['uid'] = str(session_id)
+        local_id = account_info['users'][0]['localId']
         print(user, account_info)
         #########################
         #### to add role checking
+        try:
+            account = firebase_database.child("users").child(role+"s").child(local_id).child().get().val()
+        except:
+            return render(request, 'users/login.html', {'message': "invalid role"})
+        ROLE = account.get("role")
+        if(role!=ROLE):
+            return render(request, 'users/login.html', {'message':"invalid role"})
         #########################
 
         if(role=='pitcher'):
@@ -108,7 +121,7 @@ def reset_password(request):
         return render(request, "users/reset_password.html")
 
 def about(request):
-    pass
+    return render(request, 'users/home.html', {'message':'Still working on it.'})
 
 def contact(request):
-    pass
+    return render(request, 'users/home.html', {'message':'Still working on it.'})

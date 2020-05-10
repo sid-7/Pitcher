@@ -3,16 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="bef09221-aab0-499d-9b58-7964ef49f314" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contributor/static/contributor/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/contributor/static/contributor/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contributor/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/contributor/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/investor/static/investor/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/investor/static/investor/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/investor/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/investor/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pitcher/static/pitcher/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/static/pitcher/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pitcher/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/contributor/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/contributor/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/investor/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/investor/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pitcher/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pitcher/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -152,6 +149,8 @@
       <workItem from="1589062573235" duration="7895000" />
       <workItem from="1589071302403" duration="3520000" />
       <workItem from="1589083403734" duration="983000" />
+      <workItem from="1589099395898" duration="145000" />
+      <workItem from="1589145454719" duration="5079000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;All Dome&quot;">
       <created>1588926593593</created>

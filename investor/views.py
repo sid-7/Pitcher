@@ -52,9 +52,20 @@ def dashboard(request):
             pitches = firebase_database.child("users").child("pitches").child(user.key()).get()
             for pitch in pitches.each():
                 p = pitch.val()
+                d = firebase_database.child(
+                    "users/pitches/" + local_id + "/" + pitch.key() + "/" + "contributors").get().val()
+                contributors = 0
+                if (d):
+                    contributors = len([x['contributor_id'] for x in dict(d).values()])
+                d = firebase_database.child(
+                    "users/pitches/" + local_id + "/" + pitch.key() + "/" + "investors").get().val()
+                investors = 0
+                if (d):
+                    investors = len([x['investor_id'] for x in dict(d).values()])
+
                 d = {'pitch_key': pitch.key(), "pitcher_key":user.key(), 'title': p.get('title'), 'file':p.get('file'),
                      'body': p.get('description'),'date': p.get('date_created'),'status': p.get('status'), 'gist':p.get('gist'),
-                     "contributors": p.get('contributors'), "investors": p.get('investors')}
+                     "contributors": contributors, "investors": investors}
 
                 d['interested'] = True if(d['pitch_key'] in interested_pitches) else False
                 P.append(d)

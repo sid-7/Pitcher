@@ -22,8 +22,6 @@
                     {% endif %}
                     <div class="pitch-date">{{ pitch.date }}</div>
                     <div class="pitch-gist">{{ pitch.gist }}</div>
-                    <div class="pitch-tags" style="text: 8px;border: #aeaefe 1px solid;margin: 1px 1px 1px 1px">| {% for tag in pitch.tags %}{{ tag }} | {% endfor %}
-                    </div>
                     <div class="pitch-body" hidden>{{ pitch.body }}</div>
                     <div class="pitch-contributors" hidden>{{ pitch.contributors }}</div>
                     <div class="pitch-investors" hidden>{{ pitch.investors }}</div>
@@ -63,7 +61,6 @@
                 </div>
                 <div id="contributors"></div>
                 <div id="investors"></div>
-                <div id="tags"></div>
         </div>
     </div>
 {% endblock %}

@@ -52,11 +52,10 @@ def dashboard(request):
             pitches = firebase_database.child("users").child("pitches").child(user.key()).get()
             for pitch in pitches.each():
                 p = pitch.val()
-                d = {'pitch_key': pitch.key(), "pitcher_key":user.key(), 'title': p.get('title'), 'body': p.get('description'),'date': p.get('date_created'),'status': p.get('status'), "conrtibutors": p.get('contributors'), "investors": p.get('investors')}
-                d['file'] = p.get('file')
-                print(d['file'])
-                d['tags'] = p.get('tags')
-                d['gist'] = p.get('gist')
+                d = {'pitch_key': pitch.key(), "pitcher_key":user.key(), 'title': p.get('title'), 'file':p.get('file'),
+                     'body': p.get('description'),'date': p.get('date_created'),'status': p.get('status'), 'gist':p.get('gist'),
+                     "contributors": p.get('contributors'), "investors": p.get('investors')}
+
                 d['interested'] = True if(d['pitch_key'] in interested_pitches) else False
                 P.append(d)
     return render(request, 'investor/dashboard.html', {'pitches':list(P), 'investor_key':local_id, 'chats':chat_details})
@@ -97,12 +96,9 @@ def current_projects(request):
             pitches = firebase_database.child("users").child("pitches").child(user.key()).get()
             for pitch in pitches.each():
                 p = pitch.val()
-                d = {'pitch_key': pitch.key(), "pitcher_key":user.key(), 'title': p.get('title'), 'body': p.get('description'),
-                     'date': p.get('date_created'),'status': p.get('status'), "conrtibutors": p.get('contributors'),
-                     "investors": p.get('investors')}
-                d['file'] = p.get('file')
-                d['tags'] = p.get('tags')
-                d['gist'] = p.get('gist')
+                d = {'pitch_key': pitch.key(), "pitcher_key":user.key(), 'title': p.get('title'), 'body': p.get('description'), 'file':p.get('file'),
+                     'date': p.get('date_created'),'status': p.get('status'), 'gist':p.get('gist'),
+                     "conrtibutors": p.get('contributors'), "investors": p.get('investors')}
                 if(d['pitch_key'] in interested_pitches):
                     d['interested'] = True
                     P.append(d)

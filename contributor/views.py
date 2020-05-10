@@ -61,10 +61,8 @@ def dashboard(request):
                 d = {'pitch_key': pitch.key(), 'title': p.get('title', "No Title Found"),
                      'body': p.get('description', "No Description Found"),
                      'date': p.get('date_created'), 'status': p.get('status', "active"), 'file': p.get("file"),
-                     "conrtibutors": contributors,
-                     "investors": investors}
-                d['file'] = p.get('file')
-                d['gist'] = p.get('gist')
+                     "conrtibutors": contributors, "investors": investors, 'gist':p.get('gist')}
+
                 d['interested'] = True if (d['pitch_key'] in interested_pitches) else False
                 P.append(d)
     return render(request, 'contributor/dashboard.html', {'pitches': P, 'contributor_key':local_id, 'chats':chat_details})
@@ -115,10 +113,9 @@ def current_projects(request):
                 if (d):
                     investors = len([x['investor_id'] for x in dict(d).values()])
                 d = {'pitch_key': pitch.key(), 'title': p.get('title', "No Title Found"),'body': p.get('description', "No Description Found"),
-                     'date': p.get('date_created'), 'status': p.get('status', "active"), 'file': p.get("file"), "conrtibutors": contributors,
-                     "investors": investors}
-                d['file'] = p.get('file')
-                d['gist'] = p.get('gist')
+                     'date': p.get('date_created'), 'status': p.get('status', "active"), 'file': p.get("file"), 'gist':p.get('gist'),
+                     "contributors": contributors, "investors": investors}
+
                 if(d['pitch_key'] in interested_pitches):
                     d['interested'] = True
                     P.append(d)

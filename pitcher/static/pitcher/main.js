@@ -24,11 +24,10 @@ function pitch_click(t) {
     document.getElementById('status').innerHTML = "<b>Status: </b>" + all[1].innerHTML;
     document.getElementById('date').innerHTML = "<b>Date: </b>" + all[2].innerHTML;
     document.getElementById('gist').innerHTML = "<b>GIST: </b>" + all[3].innerHTML;
-    document.getElementById('tags').innerHTML = "<b>Tags: </b>" + all[4].innerHTML;
-    document.getElementById('whole').innerHTML = "<b>Description: </b>" + all[5].innerHTML;
-    document.getElementById('contributors').innerHTML = "<b>Number of Contributors: </b>" + all[6].innerHTML;
-    document.getElementById('investors').innerHTML = "<b>Number of Investors: </b>" + all[7].innerHTML;
-        document.getElementById('video').src = all[8].innerHTML;
+    document.getElementById('whole').innerHTML = "<b>Description: </b>" + all[4].innerHTML;
+    document.getElementById('contributors').innerHTML = "<b>Number of Contributors: </b>" + all[5].innerHTML;
+    document.getElementById('investors').innerHTML = "<b>Number of Investors: </b>" + all[6].innerHTML;
+        document.getElementById('video').src = all[7].innerHTML;
 
     var k = document.getElementById('myModal').getElementsByClassName('key');
     var key = t.getElementsByTagName("input")[0].value;

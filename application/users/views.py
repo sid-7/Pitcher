@@ -4,11 +4,11 @@ import datetime
 import pyrebase
 ########################  firebase authentication  ##################################
 config = {
-  "apiKey": "AIzaSyBTlSwWe6lD6NLi8OrDPe49qWIllNgttMI",
-  "authDomain": "pitcher-275100.firebaseapp.com",
-  "databaseURL": "https://pitcher-275100.firebaseio.com",
-  "storageBucket": "pitcher-275100.appspot.com",
-  "serviceAccount": "serviceAccountCredentials.json"
+  "apiKey": "",
+  "authDomain": "",
+  "databaseURL": "",
+  "storageBucket": "",
+  "serviceAccount": ""
 }
 firebase = pyrebase.initialize_app(config)
 firebase_auth = firebase.auth()

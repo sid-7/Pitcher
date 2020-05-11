@@ -1,12 +1,12 @@
 var firebaseConfig = {
-     apiKey: 'AIzaSyBTlSwWe6lD6NLi8OrDPe49qWIllNgttMI',
-    authDomain: 'pitcher-275100.firebaseapp.com',
-    databaseURL: 'https://pitcher-275100.firebaseio.com',
-    projectId: 'pitcher-275100',
-    storageBucket: 'pitcher-275100.appspot.com',
-    messagingSenderId: '1008306122255',
-    appId: '1:1008306122255:web:58559788fa73c384fcbd7a',
-    measurementId: 'G-GPL016L81F',
+     apiKey: '',
+    authDomain: '',
+    databaseURL: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: '',
+    appId: '',
+    measurementId: '',
     };
 var fb= firebase.initializeApp(firebaseConfig);
 var storage = firebase.storage();

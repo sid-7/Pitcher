@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'pitcher_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-             'HOST': '/cloudsql/pitcher-275100:us-west4:pitcher-database',
-             'USER': 'siddharth',
-             'PASSWORD': 'root',
-             'NAME': 'pitcher',
+             'HOST': '',
+             'USER': '',
+             'PASSWORD': '',
+             'NAME': '',
     }
 }
 
@@ -131,7 +131,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 if os.getenv('GAE_APPLICATION', None):
-    STATIC_URL = 'https://storage.googleapis.com/my_bucket-5_2_2020/static/'
+    STATIC_URL = 'url_to_your_static_folder'
 else:
     STATIC_URL = '/static/'
 STATIC_ROOT = 'static'

@@ -1,0 +1,28 @@
+{% extends "pitcher/base.html" %}
+{% block content %}
+<div style="margin: 2% 5% 2% 5%;height: 94%; width: 90%">
+    <form action="/pitcher/edit_pitch/" method="POST" enctype="multipart/form-data" style="display: inline">
+        {% csrf_token %}
+        <input type="hidden" name="key" value="{{ key }}">
+        <label style="width: 100%">Pitch Title: <input type="text" name="title" value="{{ title }}" style="width: 100%"> </label> <br/>
+        <label style="width: 100%">Description:<br/><textarea name="description" rows="9" style="width: 100%">{{ body }}</textarea></label> <br/>
+        <label>Status: </label> <input type="radio" value="active" name="status"{% if active %}checked{% endif %}> <label>Active</label><input type="radio" value="completed" name="status"{% if not active %}checked{% endif %}> <label>Completed</label><br/>
+        <input type="submit" value="Update">
+    </form>
+</div>
+{% endblock %}
+
+{% block chat %}
+        {% for chat in chats %}
+            <div style="border: 1px solid black; margin: 2px 2px 2px 2px;">
+                <form action="/pitcher/chat_window/" method="post" >
+                {% csrf_token %}
+                    <div>
+                        <input type="hidden" name="chatId" value="{{ chat.0 }}">
+                        <label style="float: left; margin-left:5%;">{{ chat.1 }}</label> <button type="submit" style="float:right; margin-right: 5%;" >Chat</button>
+                    </div>
+                </form>
+                <hr>
+            </div>
+        {% endfor %}
+{% endblock %}

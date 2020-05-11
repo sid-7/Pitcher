@@ -1,0 +1,12 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block content %}
+    {{ message }}
+    <div style="max-width: 30%; max-width:50%; float:left; margin-right: 4%; margin-left: 20%;">
+        <img src="{% static 'users/icon2.jpg' %}" style="height: inherit;">
+    </div>
+    <p style="max-width: 30%;margin-left: 2%;margin-right:12%;float:right;text-align: center">
+        Welcome to the Pitcher. We aim to fill the gap between a <b>nuance idea</b> or <b>random thought</b> to its <b>implementation</b>.
+        We provide a platform for ideas to be shown to world so that people can show <b>interest</b> in it and <b>contribute</b> towards the implementation of those ideas.
+    </p>
+{% endblock content %}

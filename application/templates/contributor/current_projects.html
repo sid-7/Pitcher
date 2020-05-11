@@ -1,0 +1,71 @@
+{% extends 'contributor/base.html' %}
+{% block content %}
+    <div style="2px solid black; height: 100%; width:100%;">
+        <div id="contributor-search" style="border:1px solid lightslategrey;">
+            <form action="">
+                <input type="text" style="width: 80%; margin-right: 1%; margin-left: 1%;" placeholder="search">
+                <input type="submit" value="Search" style="width: 15%; margin-right: 0.5%;">
+            </form>
+        </div>
+        <div id="pitches" class="pitches">
+            {% for pitch in pitches %}
+                <div class="pitch" onclick="pitch_click(this);">
+                    <input type="hidden" value="{{ pitch.pitch_key }}" name="pitch_key">
+                    <input type="hidden" value="{{ pitch.pitcher_key }}" name="pitcher_key">
+                    <input type="hidden" value="{{ pitch.interested }}" name="interested">
+                    <div class="pitch-title">{{ pitch.title }}</div>
+                    {% if pitch.status == "active" %}
+                        <div class="pitch-status" style="color:green;">{{ pitch.status }}</div>
+                    {% else %}
+                        <div class="pitch-status" style="color:red;">{{ pitch.status }}</div>
+                    {% endif %}
+                    <div class="pitch-date">{{ pitch.date }}</div>
+                    <div class="pitch-gist">{{ pitch.gist }}</div>
+                    <div class="pitch-tags" style="text: 8px;border: #aeaefe 1px solid;margin: 1px 1px 1px 1px">| {% for tag in pitch.tags %}{{ tag }} | {% endfor %}
+                    </div>
+                    <div class="pitch-body" hidden>{{ pitch.body }}</div>
+                    <div class="pitch-contributors" hidden>{{ pitch.contributors }}</div>
+                    <div class="pitch-investors" hidden>{{ pitch.investors }}</div>
+                    <div class="pitch-file" hidden>{{ pitch.file }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="/contributor/interested/" method="post">{% csrf_token %}</form>
+                <input type="hidden" name="pitch_key" class="pitch_key">
+                <input type="hidden" name="pitcher_key" class="pitcher_key">
+                <input type="hidden" name="investor_key" class="investor_key" value="{{ investor_key }}">
+                <input type="button" style="float: right; margin-top: 20px;margin-left: 25px;cursor: pointer;" id="interested_button" onclick="interested(this);">
+                <div id="title"></div>
+                <div id="status"></div>
+                <div id="date" hidden></div>
+                <div id="gist" hidden></div>
+                <div id="whole"></div>
+                <div id="summary"></div>
+                <div id="files">
+                    <video id="video" width="320" height="240" type="video/mp4"  controls>
+                            <p>Your browser does not support the video element.</p>
+                    </video>
+                </div>
+                <div id="contributors"></div>
+                <div id="investors"></div>
+                <div id="tags"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block chat %}
+        {% for chat in chats %}
+            <form action="/investor/chat_window/" method="post">
+            {% csrf_token %}
+                <div>
+                    <input type="hidden" name="chatId" value="{{ chat.0 }}">
+                    <label style="float: left; margin-left:5%;">{{ chat.1 }}</label> <button type="submit" style="float:right; margin-right: 5%;" >Chat</button>
+                </div>
+            </form>
+        {% endfor %}
+{% endblock %}

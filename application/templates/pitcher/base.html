@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="Mashup templates have been developped by Orson.io team" name="author">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'pitcher/assets/apple-icon-180x180.png' %}">
+  <link href="{% static 'pitcher/assets/favicon.ico' %}" rel="icon">
+  <link href="" rel="stylesheet">
+  <title>Pitcher</title>
+  <link href="{% static 'pitcher/main.550dcf66.css' %}" rel="stylesheet">
+  <link href="{% static 'pitcher/main.css' %}" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
+  <script type="text/javascript" src="{% static 'pitcher/main.js' %}"></script>
+</head>
+
+<body>
+    <header>
+      <nav class="navbar navbar-default active">
+        <div class="container">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/users/home" title="">Pitcher - Pitching On the Go!</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+          </div>
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'pitcher-dashboard' %}" >Home</a></li>
+                <li><a href="{% url 'pitcher-new_pitch' %}" >New Pitch</a></li>
+                <li><a href="{% url 'pitcher-chat_window' %}" >Chatrooms</a></li>
+                <li><a href="{% url 'pitcher-delete_pitcher' %}" >Delete Account</a></li>
+                <li><a href="{% url 'pitcher-logout' %}" >Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <body>
+        <div style="width:23%; height: 550px; border:2px solid black;float: right; margin-right: 1%; margin-left: 1%;overflow: scroll;" id="chats">{% block chat %}{% endblock %}</div>
+        <div id="content" style="width:73%; height: 550px; border:2px solid black;float: left; margin-right: 1%; margin-left: 1%;" >{% block content %}{% endblock %}</div>
+    </body>
+</html>

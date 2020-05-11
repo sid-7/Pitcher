@@ -1,0 +1,22 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<div style="display: inline-block;width: 25%;height:100%;border: 2px solid black;text-align: left; margin-left: 25%;">
+    <form action="/users/login/" method="POST" style="align-self: left;" name="loginform" onsubmit="return validateLoginForm()">
+        {% csrf_token %}
+            <pre><div>Email:    <input type="text" name="email"> <br/></div>
+            <div>Password: <input type="password" name="password"></div>
+            <div>Role:  <input type="radio" name="role" value="pitcher" ><label for="pitcher"> Pitcher</label>
+                <input type="radio" name="role" value="investor" style="margin-left: -83.5px;"><label for="investor"> Investor</label>
+                <input type="radio" name="role" value="contributor" style="margin-left: -83.5px;"><label for="contributor"> Contributor</label></div>
+            </pre>
+            {% if message %}
+                <p style="font-size: 18px; color: red;margin-left: 2%;">{{ message }}</p>
+            {% endif %}
+            <input type="submit" value="Login" style="margin-left: 40%;"><br/>
+    </form>
+    <form action="/users/reset_password/" method="POST" style="margin-left: 30%" name="forgot_password">
+        {% csrf_token %}
+        <a onclick="document.forms['forgot_password'].submit()" id="forgot_pwd" style="cursor:pointer;">Forgot Password</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'pitcher/base.html' %}
+
+{% block content %}
+    <input type="hidden" id="chatId" value="{{ chatId }}">
+    {% if name != '' %}
+        <div style="text-align: center; border-bottom: 2px solid black; height: 50px;">
+            <span>|: {{ name }} :|</span>
+        </div>
+    {% endif %}
+    <div id="maindiv" style="height: 84%;overflow:scroll;"></div>
+    {% if chatId != '' %}
+    <div>
+        <input type="text" id="messagearea" style="float:left; width:90%; height:5%;" onkeypress="if(event.keyCode==13){sendMessage()}">
+        <button id="chatbutton" onclick="sendMessage()" style="width:10%; height:5%;" class="send_btn">Send</button>
+    </div>
+    {% endif %}
+    <script>
+        initiate_chat();
+    </script>
+{% endblock %}
+{% block chat %}
+        {% for chat in chats %}
+            <div style="border: 1px solid black; margin: 2px 2px 2px 2px;">
+                <form action="/pitcher/chat_window/" method="post" >
+                {% csrf_token %}
+                    <div>
+                        <input type="hidden" name="chatId" value="{{ chat.0 }}">
+                        <label style="float: left; margin-left:5%;">{{ chat.1 }}</label> <button type="submit" style="float:right; margin-right: 5%;" >Chat</button>
+                    </div>
+                </form>
+                <hr>
+            </div>
+        {% endfor %}
+{% endblock %}

@@ -1,3 +1,25 @@
+.send_btn{
+	border-radius: 0 15px 15px 0 !important;
+	background-color: rgba(0,0,0,0.3) !important;
+	border:0 !important;
+	color: white !important;
+	cursor: pointer;
+}
+.contributor{
+	color: red;
+	text-align: left;
+	border: 1px dot-dot-dash indianred;
+}
+.investor{
+	color: blue;
+	text-align: right;
+	border: 1px dot-dot-dash cornflowerblue;
+}
+.pitcher{
+	color: blue;
+	text-align: right;
+	border: 1px dot-dot-dash cornflowerblue;
+}
 .pitches{
 	height: 100%;
 	margin: 2px 2px 2px 2px;
@@ -5,8 +27,7 @@
 }
 .pitch {
 	border: 1px solid lightblue;
-	border-radius: 5%;
-	background-color: #aeaefe;
+	background-color: lightgrey;
 	margin: 2px 2px 2px 2px;
 }
 .pitch-table {
@@ -29,13 +50,11 @@
 	margin-top: -2%;
 	margin-left: 5%;
 	margin-right: 2%;
-	font-size: medium;
 	float: right;
 }
 .pitch .pitch-date{
-	height: 7%;
-	margin-left: 3%;
-	font-size: small;
+	height: 10%;
+	margin-left: 5%;
 }
 .pitch .pitch-gist{
 	height: 70%;

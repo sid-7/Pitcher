@@ -1,5 +1,4 @@
 Pyrebase==3.0.27
-Django==2.2.5
+Django==3.0.5
 pymysql==0.9.3
 nltk==3.4.5
-rake-nltk==1.0.4

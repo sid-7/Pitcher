@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
-from .functs import summarizer, extract_tags
+from .functs import summarizer
 import datetime
 import pyrebase
 ########################  firebase authentication  ##################################

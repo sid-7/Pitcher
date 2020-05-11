@@ -27,6 +27,7 @@ def dashboard(request):
         return logout(request)
 
     name = firebase_database.child("users/pitchers").child(local_id).child().get().val()
+    print("LOCAL ID:", local_id)
     name = name.get('firstname')
     #########  get chatrooms  ############
     chatrooms = firebase_database.child("users").child("pitchers").child(local_id).child("chatrooms_ids").get()
@@ -42,6 +43,7 @@ def dashboard(request):
             print("users/{}/{}".format(c,b))
             investor = firebase_database.child("users").child(c).child(b).get()
             chat_details[i] = (chat_details[i][0], investor.val().get('firstname', "NoName"), chat_details[i][2])
+
     print("chats for pitcher {}: {}".format(local_id[:5], chat_details))
     #########################################
     data = firebase_database.child("users").child("pitches").child(local_id).child().get().val()

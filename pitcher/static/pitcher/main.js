@@ -46,7 +46,7 @@ function upload(){
         const promices = [];
         const upload_task = storage.ref("pitches").put(file);
         promices.push(upload_task);
-        setTimeout(alert("File is baing Uploaded. Please wait"),500);
+        setTimeout(alert("File is baing Uploaded. Please wait"),5);
         upload_task.on('state_changed', snapshot => {
             const progress = (snapshot.bytesTransfered / snapshot.totalBytes)*100;
             console.log(progress)

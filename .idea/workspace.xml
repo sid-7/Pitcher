@@ -3,16 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="bef09221-aab0-499d-9b58-7964ef49f314" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pitcher/functs.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/functs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contributor/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/contributor/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitcher/static/pitcher/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/static/pitcher/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pitcher/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/contributor/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/contributor/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/contributor/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/contributor/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/investor/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/investor/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/investor/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/investor/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/pitcher/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/pitcher/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/pitcher/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/pitcher/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/users/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/users/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitcher_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pitcher_app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/contributor/current_projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/contributor/current_projects.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -154,7 +150,8 @@
       <workItem from="1589083403734" duration="983000" />
       <workItem from="1589099395898" duration="145000" />
       <workItem from="1589145454719" duration="5079000" />
-      <workItem from="1589152017475" duration="4033000" />
+      <workItem from="1589152017475" duration="8146000" />
+      <workItem from="1589163641762" duration="2324000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;All Dome&quot;">
       <created>1588926593593</created>

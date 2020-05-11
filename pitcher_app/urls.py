@@ -24,7 +24,6 @@ urlpatterns = [
     path('', include('users.urls')),
     path('investor/', include('investor.urls')),
     path('pitcher/',include('pitcher.urls')),
-    #path('pitcher/*', include('pitcher.urls')),
     path('contributor/', include('contributor.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) #for media

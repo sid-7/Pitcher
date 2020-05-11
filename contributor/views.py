@@ -32,11 +32,13 @@ def dashboard(request):
     #print(interested_pitches)
 
     #########  get chatrooms  ############
+    print("contributor LOCALID:",local_id)
     chatrooms = firebase_database.child("users").child("contributors").child(local_id).child("chatrooms_ids").get()
     chat_details = []
-    if (chatrooms.each()):
+    print(chatrooms)
+    if chatrooms.each():
         for chatroom in chatrooms.each():
-            print(chatroom.val())
+            print("_>",chatroom.val())
             if ('pitcher_id' in chatroom.val()):
                 chat_details.append((chatroom.val()['key'], chatroom.val()['pitcher_id'], 'pitchers'))
 
@@ -58,7 +60,7 @@ def dashboard(request):
                 investors = '0'
                 if (d):
                     investors = len([x['investor_id'] for x in dict(d).values()])
-                d = {'pitch_key': pitch.key(), 'title': p.get('title', "No Title Found"),
+                d = {'pitch_key': pitch.key(), 'title': p.get('title', "No Title Found"), 'pitcher_key': user.key(),
                      'body': p.get('description', "No Description Found"),
                      'date': p.get('date_created'), 'status': p.get('status', "active"), 'file': p.get("file"),
                      "conrtibutors": contributors, "investors": investors, 'gist':p.get('gist')}
@@ -76,7 +78,7 @@ def current_projects(request):
         return logout(request)
 
     #########  get chatrooms  ############
-    chatrooms = firebase_database.child("users").child("investors").child(local_id).child("chatrooms_ids").get()
+    chatrooms = firebase_database.child("users").child("contributors").child(local_id).child("chatrooms_ids").get()
     chat_details = []
     if (chatrooms.each()):
         for chatroom in chatrooms.each():
@@ -119,7 +121,7 @@ def current_projects(request):
                 if(d['pitch_key'] in interested_pitches):
                     d['interested'] = True
                     P.append(d)
-    return render(request, 'investor/dashboard.html', {'pitches': P, 'investor_key':local_id, 'chats':chat_details})
+    return render(request, 'contributor/current_projects.html', {'pitches': P, 'investor_key':local_id, 'chats':chat_details})
 
 
 def chat_window(request):

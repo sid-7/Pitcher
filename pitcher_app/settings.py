@@ -128,7 +128,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 if os.getenv('GAE_APPLICATION', None):
-    STATIC_URL = 'https://storage.googleapis.com/unique-490/'
+    STATIC_URL = ''
 else:
     STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
